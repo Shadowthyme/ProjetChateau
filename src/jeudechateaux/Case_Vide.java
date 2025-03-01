@@ -9,9 +9,7 @@ package jeudechateaux;
  * @author hugor
  */
 public class Case_Vide extends Piece {
-    
-    public Case_Vide(char couleur, int coordx, int coordy) {
-        super(couleur, coordx, coordy);
+    public Case_Vide(int coordx, int coordy) {
+        super(' ', coordx, coordy); // Met ' ' comme couleur par défaut
     }
-    
 }

@@ -14,4 +14,8 @@ public class Joueur {
         this.nbr_piece = nbr_piece;
         this.couleur = couleur;
     }
+
+    public char getCouleur() {
+        return couleur;
+    }
 }
