@@ -9,7 +9,14 @@ package jeudechateaux;
  * @author hugor
  */
 public class Case_Vide extends Piece {
-    public Case_Vide(int coordx, int coordy) {
-        super(' ', coordx, coordy); // Met ' ' comme couleur par défaut
+    private boolean interdite;
+
+    public Case_Vide(int coordx, int coordy, boolean interdite) {
+        super(' ', coordx, coordy);
+        this.interdite = interdite;
+    }
+
+    public boolean estInterdite() {
+        return interdite;
     }
 }

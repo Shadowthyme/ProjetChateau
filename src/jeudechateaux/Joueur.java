@@ -18,4 +18,7 @@ public class Joueur {
     public char getCouleur() {
         return couleur;
     }
+    public String getNom() {
+        return pseudo;
+}
 }
