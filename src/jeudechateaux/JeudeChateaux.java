@@ -8,20 +8,24 @@ public class JeudeChateaux {
         Scanner scanner = new Scanner(System.in);
         Jeu jeu = new Jeu();
         jeu.Generer_plateau();
-        jeu.afficherPlateau();
 
-        System.out.println("Entrez les coordonnees de la piece a deplacer (x1 y1) et la destination (x2 y2) : ");
-        int x1 = scanner.nextInt();
-        int y1 = scanner.nextInt();
-        int x2 = scanner.nextInt();
-        int y2 = scanner.nextInt();
+        while (true) { // Boucle infinie (on ajoutera une condition de fin plus tard)
+            jeu.afficherPlateau();
+            System.out.println(jeu.getJoueurActif().getNom() + ", c'est votre tour !");
+            System.out.println("Entrez les coordonnees de la piece a deplacer (x1 y1) et la destination (x2 y2) : ");
 
-        if (jeu.deplacerPiece(x1, y1, x2, y2)) {
-            System.out.println("Deplacement reussi !");
-        } else {
-            System.out.println("Deplacement invalide.");
-        }
+            int x1 = scanner.nextInt();
+            int y1 = scanner.nextInt();
+            int x2 = scanner.nextInt();
+            int y2 = scanner.nextInt();
 
-        jeu.afficherPlateau();
+            if (jeu.deplacerPiece(x1, y1, x2, y2)) {
+                System.out.println("Deplacement reussi !");
+            } else {
+                System.out.println("Deplacement invalide");
             }
+
+            // Ajout futur : condition de victoire pour sortir de la boucle
+        }
     }
+}
