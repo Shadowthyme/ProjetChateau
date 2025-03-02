@@ -11,7 +11,7 @@ public class JeudeChateaux {
 
         while (true) { // Boucle infinie (on ajoutera une condition de fin plus tard)
             jeu.afficherPlateau();
-            System.out.println(jeu.getJoueurActif().getNom() + ", c'est votre tour !");
+            System.out.println(jeu.getJoueurActif().getPseudo() + ", c'est votre tour !");
             System.out.println("Entrez les coordonnees de la piece a deplacer (x1 y1) et la destination (x2 y2) : ");
 
             int x1 = scanner.nextInt();
