@@ -77,98 +77,120 @@ public class Jeu {
     }
 
     public boolean deplacerPiece(int x1, int y1, int x2, int y2) {
-        // Vérifier si la case d'origine contient une pièce
-        if (Plateau[x1][y1] == null || Plateau[x1][y1] instanceof Case_Vide) {
-            System.out.println("Aucune piece à cet endroit !");
-            return false;
-        }
-
-        Piece piece = Plateau[x1][y1];
-
-        // Vérifier si la pièce appartient au joueur actif
-        if (piece.getCouleur() != J_actif.getCouleur()) {
-            System.out.println("Ce n'est pas votre piece !");
-            return false;
-        }
-
-        // Vérifier si le déplacement est valide
-        if (!mouvementValide(piece, x2, y2)) {
-            return false;
-        }
-
-        // Vérifier si la case de destination est interdite
-        if (Plateau[x2][y2] instanceof Case_Vide && ((Case_Vide) Plateau[x2][y2]).estInterdite()) {
-            System.out.println("Deplacement interdit vers une case non autorisee !");
-            return false;
-        }
-
-        // Vérifier si une pièce adverse est présente
-        if (Plateau[x2][y2] != null && !(Plateau[x2][y2] instanceof Case_Vide)) {
-            Piece cible = Plateau[x2][y2];
-            if (cible.getCouleur() == piece.getCouleur()) {
-                System.out.println("Vous ne pouvez pas capturer votre propre piece !");
-                return false;
-            }
-            System.out.println("Piece capturee : " + cible.getClass().getSimpleName());
-        }
-
-        // Déplacer la pièce (capture ou déplacement simple)
-        Plateau[x2][y2] = piece;
-        piece.setCoordonnees(x2, y2);
-
-        // Vérifier si la case d'origine était interdite avant de la vider
-        boolean etaitInterdite = (Plateau[x1][y1] instanceof Case_Vide) && ((Case_Vide) Plateau[x1][y1]).estInterdite();
-        Plateau[x1][y1] = new Case_Vide(x1, y1, etaitInterdite);
-
-        // Changer de tour après un déplacement réussi
-        changerTour();
-
-        return true;
-    }
-
-    private boolean mouvementValide(Piece piece, int x2, int y2) {
-        int x1 = piece.getCoordx(); // Position actuelle en ligne
-        int y1 = piece.getCoordy(); // Position actuelle en colonne
-        int dx = Math.abs(x2 - x1); // Distance en ligne
-        int dy = Math.abs(y2 - y1); // Distance en colonne
-
-        // Vérifier si la case contient une pièce adverse ou est vide
-        if (Plateau[x2][y2] != null && !(Plateau[x2][y2] instanceof Case_Vide)) {
-            Piece cible = Plateau[x2][y2];
-            if (cible.getCouleur() == piece.getCouleur()) {
-                System.out.println("Vous ne pouvez pas capturer votre propre piece !");
-                return false;
-            } else {
-                System.out.println("Capture autorisee de " + cible.getClass().getSimpleName() + " en " + x2 + "," + y2);
-            }
-        }
-
-        // Déplacement des pions (1 case dans toutes les directions)
-        if (piece instanceof Pion) {
-            if ((dx == 1 && dy == 0) || (dx == 0 && dy == 1) || (dx == 1 && dy == 1)) {
-                return true;
-            } else {
-                System.out.println("Deplacement invalide pour un pion !");
-                return false;
-            }
-        }
-
-        // Déplacement des cavaliers (1 case partout OU en L)
-        if (piece instanceof Cavalier) {
-            if ((dx == 1 && dy == 0) || (dx == 0 && dy == 1) || (dx == 1 && dy == 1)
-                    || // 1 case dans toutes les directions
-                    (dx == 2 && dy == 1) || (dx == 1 && dy == 2)) { // Mouvement en L
-                return true;
-            } else {
-                System.out.println("Deplacement invalide pour un cavalier !");
-                return false;
-            }
-        }
-
-        // Si ce n'est ni un pion ni un cavalier, refuser le mouvement
-        System.out.println("Type de piece inconnu !");
+    // Vérifier si la case d'origine contient une pièce
+    if (Plateau[x1][y1] == null || Plateau[x1][y1] instanceof Case_Vide) {
+        System.out.println("Aucune piece à cet endroit !");
         return false;
     }
+
+    Piece piece = Plateau[x1][y1];
+
+    // Vérifier si la pièce appartient au joueur actif
+    if (piece.getCouleur() != J_actif.getCouleur()) {
+        System.out.println("Ce n'est pas votre piece !");
+        return false;
+    }
+
+    // Vérifier si le déplacement est valide
+    if (!mouvementValide(piece, x2, y2)) {
+        return false;
+    }
+
+    // Vérifier si la case de destination est interdite
+    if (Plateau[x2][y2] instanceof Case_Vide && ((Case_Vide) Plateau[x2][y2]).estInterdite()) {
+        System.out.println("Deplacement interdit vers une case non autorisee !");
+        return false;
+    }
+
+    // Vérifier si une capture est effectuée (saut par-dessus une pièce adverse)
+    int milieuX = (x1 + x2) / 2;
+    int milieuY = (y1 + y2) / 2;
+
+    if (Math.abs(x2 - x1) == 2 || Math.abs(y2 - y1) == 2) { // Déplacement de 2 cases (saut)
+        if (Plateau[milieuX][milieuY] != null && !(Plateau[milieuX][milieuY] instanceof Case_Vide)) {
+            Piece cible = Plateau[milieuX][milieuY];
+            if (cible.getCouleur() != piece.getCouleur()) {
+                // Vérifier qu'il n'y a pas d'autre pièce alignée sur la trajectoire
+                if (Plateau[x2][y2] instanceof Case_Vide) {
+                    System.out.println("Piece capturee : " + cible.getClass().getSimpleName());
+                    Plateau[milieuX][milieuY] = new Case_Vide(milieuX, milieuY, false); // Suppression de la pièce capturée
+                } else {
+                    System.out.println("Une autre piece bloque le saut !");
+                    return false;
+                }
+            } else {
+                System.out.println("Vous ne pouvez pas capturer votre propre piece !");
+                return false;
+            }
+        } else {
+            System.out.println("Aucune piece à capturer !");
+            return false;
+        }
+    }
+
+    // Déplacer la pièce (capture ou déplacement simple)
+    Plateau[x2][y2] = piece;
+    piece.setCoordonnees(x2, y2);
+
+    // Vérifier si la case d'origine était interdite avant de la vider
+    boolean etaitInterdite = (Plateau[x1][y1] instanceof Case_Vide) && ((Case_Vide) Plateau[x1][y1]).estInterdite();
+    Plateau[x1][y1] = new Case_Vide(x1, y1, etaitInterdite);
+
+    // Changer de tour après un déplacement réussi
+    changerTour();
+
+    return true;
+}
+
+private boolean mouvementValide(Piece piece, int x2, int y2) {
+    int x1 = piece.getCoordx();
+    int y1 = piece.getCoordy();
+    int dx = Math.abs(x2 - x1);
+    int dy = Math.abs(y2 - y1);
+
+    // Vérifier si la case de destination est interdite
+    if (Plateau[x2][y2] instanceof Case_Vide && ((Case_Vide) Plateau[x2][y2]).estInterdite()) {
+        System.out.println("Deplacement interdit vers une case non autorisee !");
+        return false;
+    }
+
+    // Déplacement spécifique pour le cavalier (en "L")
+    if (piece instanceof Cavalier) {
+        System.out.println("C'est un cavalier !");
+        if ((dx == 2 && dy == 1) || (dx == 1 && dy == 2)) {
+            // Vérifier si la case est vide ou contient une pièce adverse
+            if (Plateau[x2][y2] instanceof Case_Vide || 
+                (Plateau[x2][y2] != null && Plateau[x2][y2].getCouleur() != piece.getCouleur())) {
+                System.out.println("Deplacement en L valide !");
+                return true;
+            } else {
+                System.out.println("Deplacement invalide : vous ne pouvez pas capturer votre propre piece.");
+                return false;
+            }
+        }
+    }
+
+    // Déplacement simple (1 case dans toutes les directions)
+    if ((dx == 1 && dy == 0) || (dx == 0 && dy == 1) || (dx == 1 && dy == 1)) {
+        return Plateau[x2][y2] instanceof Case_Vide;
+    }
+
+    // Capture (saut par-dessus une pièce adverse)
+    if ((dx == 2 && dy == 0) || (dx == 0 && dy == 2) || (dx == 2 && dy == 2)) {
+        int x_middle = (x1 + x2) / 2;
+        int y_middle = (y1 + y2) / 2;
+        if (Plateau[x_middle][y_middle] != null && !(Plateau[x_middle][y_middle] instanceof Case_Vide)) {
+            Piece cible = Plateau[x_middle][y_middle];
+            if (cible.getCouleur() != piece.getCouleur() && Plateau[x2][y2] instanceof Case_Vide) {
+                System.out.println("Capture possible !");
+                return true;
+            }
+        }
+    }
+
+    System.out.println("Deplacement invalide !");
+    return false;
+}
 
     public void changerTour() {
         if (J_actif == Joueur1) {
