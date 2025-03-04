@@ -8,10 +8,13 @@ package jeudechateaux;
  *
  * @author hugor
  */
-public class Pion extends Piece{
-    
+    class Pion extends Piece {
+
     public Pion(char couleur, int coordx, int coordy) {
         super(couleur, coordx, coordy);
     }
-    
+    @Override
+    boolean mouvementValide(Piece[][] Plateau, int x2, int y2) {
+        return mouvementCommeRoi(x2, y2);
+    }
 }

@@ -4,11 +4,12 @@ package jeudechateaux;
  *
  * @author hugor
  */
-public class Piece {
+abstract class Piece {
+
     private char couleur;
-    private int coordx, coordy;
-    
-    public Piece(char couleur, int coordx, int coordy){
+    protected int coordx, coordy;
+
+    public Piece(char couleur, int coordx, int coordy) {
         this.couleur = couleur;
         this.coordx = coordx;
         this.coordy = coordy;
@@ -28,7 +29,7 @@ public class Piece {
     }
 
     int getCoordy() {
-         return this.coordy;
+        return this.coordy;
     }
 
     public String getSymbole() {
@@ -39,6 +40,46 @@ public class Piece {
         } else {
             return ".";
         }
-}
+    }
 
-}
+    public boolean deplacerPiece(Piece[][] Plateau, int x2, int y2) {
+        // Vérifier si le déplacement est valide
+        if (!mouvementValide(Plateau, x2, y2)) {
+            return false;
+        } else {
+            coordx = x2;
+            coordy = y2;
+        }
+        return true;
+    }
+
+    public boolean capture(Piece[][] Plateau, int x2, int y2) {
+        int dx = Math.abs(x2 - coordx);
+        int dy = Math.abs(y2 - coordy);
+
+        // Capture (saut par-dessus une pièce adverse)
+        if ((dx == 2 && dy == 0) || (dx == 0 && dy == 2) || (dx == 2 && dy == 2)) {
+            int x_middle = (coordx + x2) / 2;
+            int y_middle = (coordy + y2) / 2;
+            if (Plateau[x_middle][y_middle] != null && !(Plateau[x_middle][y_middle] instanceof Case_Vide)) {
+                Piece cible = Plateau[x_middle][y_middle];
+                if (cible.getCouleur() != this.getCouleur() && Plateau[x2][y2] instanceof Case_Vide) {
+                    System.out.println("Capture possible !");
+                    return true;
+                }
+            }
+        }
+
+        System.out.println("Deplacement invalide !");
+        return false;
+    }
+
+    abstract boolean mouvementValide(Piece[][] Plateau, int x2, int y2);
+
+    // Méthode commune pour le mouvement du Roi
+    protected boolean mouvementCommeRoi(int x2, int y2) {
+        int dx = Math.abs(x2 - coordx);
+        int dy = Math.abs(y2 - coordy);
+        return (dx == 1 && dy == 0) || (dx == 0 && dy == 1) || (dx == 1 && dy == 1);
+    }
+}   
