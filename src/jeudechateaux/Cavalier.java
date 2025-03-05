@@ -27,18 +27,18 @@ public class Cavalier extends Piece {
         while (capture == false) {
             System.out.println("Que souhaitez vous faire?");
             System.out.println("1 - Vous deplacer");
-            System.out.println("2 - Capturer une piece (Attention! plus de déplacement possible après cette action)");
+            System.out.println("2 - Capturer une piece (Attention! plus de deplacement possible apres cette action)");
             int rep = sc.nextInt();
             if (rep == 1) {
-                System.out.println("Ecrire les coordonnées d'arrivée ex: 5 4");
+                System.out.println("Ecrire les coordonnees d'arrivee ex: 5 4");
                 int x2 = sc.nextInt();
                 int y2 = sc.nextInt();
                 boolean dep = deplacerPiece(Plateau, x2, y2);
                 if (dep == false) {
-                    System.out.println("Erreur, veuillez réessayer");
+                    System.out.println("Erreur, veuillez reessayer");
                     afficherPlateau(Plateau);
                 } else {
-                    System.out.println("Déplacement effectué");
+                    System.out.println("Deplacement effectue");
                     afficherPlateau(Plateau);
                     
                 }
@@ -46,7 +46,7 @@ public class Cavalier extends Piece {
             }
             if (rep == 2) {
                 afficherPlateau(Plateau);
-                System.out.println("entrez les coordonnées de la pièce après le saut ex: 5 3  --> 5 5");
+                System.out.println("entrez les coordonnees de la piece apres le saut ex: 5 3  --> 5 5");
                 int x2 = sc.nextInt();
                 int y2 = sc.nextInt();
                 capture = capture(Plateau, x2,y2);
