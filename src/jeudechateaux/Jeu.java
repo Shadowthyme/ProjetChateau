@@ -68,8 +68,13 @@ public class Jeu {
             System.out.printf("%2d ", 13 - i); // Numérotation des lignes
 
             for (int j = 0; j < Plateau[i].length; j++) {
-                if (Plateau[i][j] == null || Plateau[i][j] instanceof Case_Vide) {
-                    System.out.print(".  "); // Afficher un point pour une case vide
+                if (Plateau[i][j] instanceof Case_Vide) {
+                    Case_Vide CV = (Case_Vide) Plateau[i][j];
+                    if (CV.estInterdite()) {
+                        System.out.print("X  ");
+                    } else {
+                        System.out.print(".  "); // Afficher un point pour une case vide
+                    }
                 } else {
                     System.out.print(Plateau[i][j].getSymbole() + " "); // Afficher le symbole de la pièce
                 }
@@ -134,7 +139,7 @@ public class Jeu {
         while (true) {
             // Afficher le plateau et les informations du joueur actif
             afficherPlateau();
-            System.out.println("C'est au tour de "+ J_actif.getPseudo() +" qui joue les pieces de couleur " + (J_actif.getCouleur() == 'B' ? "Blanches" : "Noires"));
+            System.out.println("C'est au tour de " + J_actif.getPseudo() + " qui joue les pieces de couleur " + (J_actif.getCouleur() == 'B' ? "Blanches" : "Noires"));
 
             // Vérification de la condition de victoire après chaque tour
             char victoire1 = Victoire_Chateau();
@@ -165,7 +170,13 @@ public class Jeu {
                     System.out.println("Entrer les coordonnees d'arrivee (x2 y2) :");
                     int x2 = sc.nextInt();
                     int y2 = sc.nextInt();
-                    Plateau[x1][y1].deplacerPiece(Plateau, x2, y2);
+                    if (Plateau[x1][y1].deplacerPiece(Plateau, x2, y2) == false) {
+                        while (Plateau[x1][y1].deplacerPiece(Plateau, x2, y2) == false) {
+                            System.out.println("Entrer les coordonnees d'arrivee (x2 y2) :");
+                            x2 = sc.nextInt();
+                            y2 = sc.nextInt();
+                        }
+                    }
                 } else if (action == 2) {
                     System.out.println("Entrer les coordonnees d'arrivee pour la capture (x2 y2) :");
                     int x2 = sc.nextInt();

@@ -46,16 +46,26 @@ abstract class Piece {
 
     public boolean deplacerPiece(Piece[][] Plateau, int x2, int y2) {
         // Vérifier si le déplacement est valide
-        if (!mouvementValide(Plateau, x2, y2)) {
-            return false;
-        } else {
-            Plateau[x2][y2] = Plateau[coordx][coordy];
-            Plateau[coordx][coordy] =new Case_Vide(coordx,coordy, false);
-            coordx = x2;
-            coordy = y2;
+        if (Plateau[x2][y2] instanceof Case_Vide) {
+            Case_Vide CV = (Case_Vide) Plateau[x2][y2];
+            if (CV.estInterdite()) {
+                return false;
+            }
+            if (!mouvementValide(Plateau, x2, y2)) {
+                return false;
+            } else {
+                Plateau[x2][y2] = Plateau[coordx][coordy];
+                Plateau[coordx][coordy] = new Case_Vide(coordx, coordy, false);
+                coordx = x2;
+                coordy = y2;
+            }
         }
-        return true;
+    return true;
     }
+
+    
+
+    
 
     public boolean capture(Piece[][] Plateau, int x2, int y2) {
         int dx = Math.abs(x2 - coordx);
@@ -71,15 +81,15 @@ abstract class Piece {
                 if (cible.getCouleur() != this.getCouleur() && Plateau[x2][y2] instanceof Case_Vide) {
                     System.out.println("Capture effectuee !");
                     Plateau[x2][y2] = Plateau[coordx][coordy];
-                    Plateau[coordx][coordy] =new Case_Vide(coordx,coordy, false);
+                    Plateau[coordx][coordy] = new Case_Vide(coordx, coordy, false);
                     coordx = x2;
                     coordy = y2;
                     capture = true;
-                    Plateau[x_middle][y_middle] = new Case_Vide(x_middle,y_middle,false);
+                    Plateau[x_middle][y_middle] = new Case_Vide(x_middle, y_middle, false);
                 }
             }
         }
-        
+
         return capture;
     }
 
