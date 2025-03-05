@@ -4,10 +4,6 @@
  */
 package jeudechateaux;
 
-/**
- *
- * @author hugor
- */
 public class Ordinateur extends Joueur{
     
     private Piece[] liste_Piece;

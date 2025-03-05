@@ -1,9 +1,5 @@
 package jeudechateaux;
 
-/**
- *
- * @author hugor
- */
 public class Joueur {
 
     private String pseudo;

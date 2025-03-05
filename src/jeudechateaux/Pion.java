@@ -4,10 +4,6 @@
  */
 package jeudechateaux;
 
-/**
- *
- * @author hugor
- */
     class Pion extends Piece {
 
     public Pion(char couleur, int coordx, int coordy) {

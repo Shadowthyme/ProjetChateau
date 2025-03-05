@@ -2,10 +2,6 @@ package jeudechateaux;
 
 import java.util.Scanner;
 
-/**
- *
- * @author hugor
- */
 abstract class Piece {
 
     private char couleur;

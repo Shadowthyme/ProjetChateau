@@ -2,10 +2,6 @@ package jeudechateaux;
 
 import java.util.Scanner;
 
-/**
- *
- * @author hugor
- */
 public class Jeu {
 
     private Piece[][] Plateau;

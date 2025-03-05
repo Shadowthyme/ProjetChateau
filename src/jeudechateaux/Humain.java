@@ -4,10 +4,6 @@
  */
 package jeudechateaux;
 
-/**
- *
- * @author hugor
- */
 public class Humain extends Joueur {
     
     public Humain(String pseudo, int nbr_piece, char couleur) {

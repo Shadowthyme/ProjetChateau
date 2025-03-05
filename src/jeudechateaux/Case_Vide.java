@@ -4,10 +4,6 @@
  */
 package jeudechateaux;
 
-/**
- *
- * @author hugor
- */
 public class Case_Vide extends Piece {
     private boolean interdite;
 

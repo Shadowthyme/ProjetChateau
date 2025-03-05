@@ -6,10 +6,6 @@ package jeudechateaux;
 
 import java.util.Scanner;
 
-/**
- *
- * @author hugor
- */
 public class Cavalier extends Piece {
 
     public Cavalier(char couleur, int coordx, int coordy) {
