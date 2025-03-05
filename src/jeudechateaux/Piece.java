@@ -1,5 +1,7 @@
 package jeudechateaux;
 
+import java.util.Scanner;
+
 /**
  *
  * @author hugor
@@ -65,7 +67,8 @@ abstract class Piece {
                 Piece cible = Plateau[x_middle][y_middle];
                 if (cible.getCouleur() != this.getCouleur() && Plateau[x2][y2] instanceof Case_Vide) {
                     System.out.println("Capture possible !");
-                    return true;
+                    coordx = x2;
+                    coordy = y2;
                 }
             }
         }
@@ -74,6 +77,30 @@ abstract class Piece {
         return false;
     }
 
+    public boolean capture_chaine(Piece[][] Plateau){
+        Scanner sc = new Scanner(System.in);
+        boolean fin = false;
+        while(fin = false){
+            System.out.println("Voulez vous capturer a nouveau?");
+            System.out.println("1 - Oui");
+            System.out.println("2 - Non");
+            int rep = sc.nextInt();
+            if(rep == 1){
+                System.out.println("Ecrire les coordonnées d'arrivée ex: 5 4");
+                int x2 = sc.nextInt();
+                int y2 = sc.nextInt();
+                capture(Plateau, x2,y2);
+            }
+            if(rep==2){
+                fin = true;
+            }
+            else{
+                System.out.println("Erreur, saisir a nouveau votre choix");
+            }
+        }
+        return fin;
+    }
+    
     abstract boolean mouvementValide(Piece[][] Plateau, int x2, int y2);
 
     // Méthode commune pour le mouvement du Roi
