@@ -13,11 +13,11 @@ public class Jeu {
     private Joueur J_actif;
     private String nomFichier;
 
-    public Jeu() {
+    public Jeu(Joueur Joueur1, Joueur Joueur2, Joueur Joueur_actif) {
         this.Plateau = new Piece[13][7];
-        this.Joueur1 = new Joueur("Joueur1", 7, 'B');
-        this.Joueur2 = new Joueur("Joueur2", 7, 'N');
-        this.J_actif = Joueur1;
+        this.Joueur1 = Joueur1;
+        this.Joueur2 = Joueur2;
+        this.J_actif = Joueur_actif;
         this.nomFichier = "partie.txt";
     }
 
@@ -129,53 +129,60 @@ public class Jeu {
     }
 
     public void BoucleJeu() {
-    Scanner sc = new Scanner(System.in);
-    
-    while (true) {
-        // Afficher le plateau et les informations du joueur actif
-        afficherPlateau();
-        System.out.println("C'est au tour du joueur " + (J_actif.getCouleur() == 'B' ? "Blanc" : "Noir"));
+        Scanner sc = new Scanner(System.in);
 
-        // Vérification de la condition de victoire après chaque tour
-        char victoire = Victoire_Chateau();
-        if (victoire != ' ') {
-            System.out.println("Le joueur " + (victoire == 'B' ? "Blanc" : "Noir") + " a gagne ! Partie terminee.");
-            break; // Sortir de la boucle si la condition de victoire est remplie
+        while (true) {
+            // Afficher le plateau et les informations du joueur actif
+            afficherPlateau();
+            System.out.println("C'est au tour de "+ J_actif.getPseudo() +" qui joue les pieces de couleur " + (J_actif.getCouleur() == 'B' ? "Blanches" : "Noires"));
+
+            // Vérification de la condition de victoire après chaque tour
+            char victoire1 = Victoire_Chateau();
+            if (victoire1 != ' ') {
+                System.out.println("Le joueur " + (victoire1 == 'B' ? "Blanc" : "Noir") + " a gagne ! Partie terminee.");
+                break; // Sortir de la boucle si la condition de victoire est remplie
+            }
+
+            // Vérification si le joueur actif n'a plus de pièces, dans ce cas l'autre joueur gagne
+            char victoire2 = Victoire_platVide();
+            if (victoire2 != ' ') {
+                System.out.println("Le joueur " + (victoire2 == 'B' ? "Blanc" : "Noir") + " a gagne ! Partie terminee.");
+                break; // Sortir de la boucle si la condition de victoire est remplie
+            }
+
+            // Demander au joueur actif de faire son mouvement
+            System.out.println("Choisissez la piece a deplacer (coordonnees x1 y1) :");
+            int x1 = sc.nextInt();
+            int y1 = sc.nextInt();
+            if (Plateau[x1][y1].getCouleur() != J_actif.getCouleur()) {
+                System.out.println("Erreur, il ne s'agit pas de votre piece");
+            } else {
+                System.out.println("Choisir action : 1 - Deplacer, 2 - Capturer, 3 - Charger le cavalier");
+                int action = sc.nextInt();
+
+                // Actions en fonction de l'entrée de l'utilisateur
+                if (action == 1) {
+                    System.out.println("Entrer les coordonnees d'arrivee (x2 y2) :");
+                    int x2 = sc.nextInt();
+                    int y2 = sc.nextInt();
+                    Plateau[x1][y1].deplacerPiece(Plateau, x2, y2);
+                } else if (action == 2) {
+                    System.out.println("Entrer les coordonnees d'arrivee pour la capture (x2 y2) :");
+                    int x2 = sc.nextInt();
+                    int y2 = sc.nextInt();
+                    boolean capture = Plateau[x1][y1].capture(Plateau, x2, y2);
+                    if (capture == true) {
+                        Plateau[x2][y2].capture_chaine(Plateau);
+                    }
+                } else if (action == 3) {
+                    // Charger le cavalier
+                    Cavalier cavalier = (Cavalier) Plateau[x1][y1];
+                    cavalier.chargeCavalier(Plateau);
+                }
+
+                // Changer de tour après chaque action
+                changerTour();
+            }
         }
-
-        // Vérification si le joueur actif n'a plus de pièces, dans ce cas l'autre joueur gagne
-        victoire = Victoire_platVide();
-        if (victoire != ' ') {
-            System.out.println("Le joueur " + (victoire == 'B' ? "Blanc" : "Noir") + " a gagne ! Partie terminee.");
-            break; // Sortir de la boucle si la condition de victoire est remplie
-        }
-
-        // Demander au joueur actif de faire son mouvement
-        System.out.println("Choisissez la piece a deplacer (coordonnees x1 y1) :");
-        int x1 = sc.nextInt();
-        int y1 = sc.nextInt();
-        System.out.println("Choisir action : 1 - Deplacer, 2 - Capturer, 3 - Charger le cavalier");
-        int action = sc.nextInt();
-
-        // Actions en fonction de l'entrée de l'utilisateur
-        if (action == 1) {
-            System.out.println("Entrer les coordonnees d'arrivee (x2 y2) :");
-            int x2 = sc.nextInt();
-            int y2 = sc.nextInt();
-            Plateau[x1][y1].deplacerPiece(Plateau, x2, y2);
-        } else if (action == 2) {
-            System.out.println("Entrer les coordonnees d'arrivee pour la capture (x2 y2) :");
-            int x2 = sc.nextInt();
-            int y2 = sc.nextInt();
-            Plateau[x1][y1].capture(Plateau, x2, y2);
-        } else if (action == 3) {
-            // Charger le cavalier
-            Cavalier cavalier = (Cavalier) Plateau[x1][y1];
-            cavalier.chargeCavalier(Plateau);
-        }
-
-        // Changer de tour après chaque action
-        changerTour();
     }
-}
 }

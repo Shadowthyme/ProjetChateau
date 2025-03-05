@@ -50,7 +50,7 @@ abstract class Piece {
             return false;
         } else {
             Plateau[x2][y2] = Plateau[coordx][coordy];
-            Plateau[coordx][coordy] = null;
+            Plateau[coordx][coordy] =new Case_Vide(coordx,coordy, false);
             coordx = x2;
             coordy = y2;
         }
@@ -71,10 +71,11 @@ abstract class Piece {
                 if (cible.getCouleur() != this.getCouleur() && Plateau[x2][y2] instanceof Case_Vide) {
                     System.out.println("Capture effectuee !");
                     Plateau[x2][y2] = Plateau[coordx][coordy];
-                    Plateau[coordx][coordy] = null;
+                    Plateau[coordx][coordy] =new Case_Vide(coordx,coordy, false);
                     coordx = x2;
                     coordy = y2;
                     capture = true;
+                    Plateau[x_middle][y_middle] = new Case_Vide(x_middle,y_middle,false);
                 }
             }
         }
