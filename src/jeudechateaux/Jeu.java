@@ -1,5 +1,7 @@
 package jeudechateaux;
 
+import java.util.Scanner;
+
 /**
  *
  * @author hugor
@@ -13,8 +15,8 @@ public class Jeu {
 
     public Jeu() {
         this.Plateau = new Piece[13][7];
-        this.Joueur1 = new Joueur("Joueur1", 5, 'B');
-        this.Joueur2 = new Joueur("Joueur2", 5, 'N');
+        this.Joueur1 = new Joueur("Joueur1", 7, 'B');
+        this.Joueur2 = new Joueur("Joueur2", 7, 'N');
         this.J_actif = Joueur1;
         this.nomFichier = "partie.txt";
     }
@@ -84,11 +86,79 @@ public class Jeu {
         }
     }
 
+    public void scan_plateau() {
+        int nbr_piece = 0;
+        for (int i = 0; i < Plateau.length; i++) {
+            for (int j = 0; j < Plateau[i].length; j++) {
+                if (Plateau[i][j].getCouleur() == J_actif.getCouleur()) {
+                    nbr_piece++;
+                }
+            }
+
+        }
+        J_actif.modif_nbr_piece(nbr_piece);
+    }
+
+    public char Victoire_Chateau() {
+        char victoire = ' ';
+        if (!(Plateau[0][3] instanceof Case_Vide) && Plateau[0][3].getCouleur() == 'B') {
+            victoire = 'B';
+        }
+        if (!(Plateau[12][3] instanceof Case_Vide) && Plateau[12][3].getCouleur() == 'N') {
+            victoire = 'N';
+        }
+        return victoire;
+    }
+
+    public char Victoire_platVide() {
+        char victoire = ' ';
+        scan_plateau();
+        if (J_actif.getnbr_piece() == 0) {
+            changerTour();
+            victoire = J_actif.getCouleur();
+        }
+    return victoire;
+    }
+
     public Joueur getJoueurActif() {
         return J_actif;
     }
-    
-    public Piece[][] getPlateau(){
+
+    public Piece[][] getPlateau() {
         return Plateau;
+    }
+
+    public void BoucleJeu(){
+        //faite pour tester, pas de sécuritées
+        Victoire_platVide();
+        Scanner sc = new Scanner(System.in);
+        afficherPlateau();
+        System.out.println("choisir piece");
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        System.out.println("bouger(1) ou manger(2)? ou charge du cavalier(3)");
+        int rep = sc.nextInt();
+        if(rep==1){
+            System.out.println("coord d'arrivee");
+            int x2 = sc.nextInt();
+            int y2 = sc.nextInt();
+            Plateau[x1][y1].deplacerPiece(Plateau,x2,y2);
+            
+            afficherPlateau();
+        }
+        if(rep == 2){
+            System.out.println("coord d'arrivee");
+            int x2 = sc.nextInt();
+            int y2 = sc.nextInt();
+            boolean cap =Plateau[x1][y1].capture(Plateau,x2,y2);
+            if (cap == true){
+                Plateau[x2][y2].capture_chaine(Plateau);
+            }
+        }
+        if(rep==3){
+            Cavalier cavalier = (Cavalier)Plateau[x1][y1];
+            cavalier.chargeCavalier(Plateau);
+        }
+        Victoire_Chateau();
     }
 }

@@ -40,12 +40,16 @@ public class Cavalier extends Piece {
                 boolean dep = deplacerPiece(Plateau, x2, y2);
                 if (dep == false) {
                     System.out.println("Erreur, veuillez réessayer");
+                    afficherPlateau(Plateau);
                 } else {
                     System.out.println("Déplacement effectué");
+                    afficherPlateau(Plateau);
+                    
                 }
 
             }
             if (rep == 2) {
+                afficherPlateau(Plateau);
                 System.out.println("entrez les coordonnées de la pièce après le saut ex: 5 3  --> 5 5");
                 int x2 = sc.nextInt();
                 int y2 = sc.nextInt();
