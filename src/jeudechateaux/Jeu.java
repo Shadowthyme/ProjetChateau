@@ -117,7 +117,7 @@ public class Jeu {
             changerTour();
             victoire = J_actif.getCouleur();
         }
-    return victoire;
+        return victoire;
     }
 
     public Joueur getJoueurActif() {
@@ -128,37 +128,54 @@ public class Jeu {
         return Plateau;
     }
 
-    public void BoucleJeu(){
-        //faite pour tester, pas de sécuritées
-        Victoire_platVide();
-        Scanner sc = new Scanner(System.in);
+    public void BoucleJeu() {
+    Scanner sc = new Scanner(System.in);
+    
+    while (true) {
+        // Afficher le plateau et les informations du joueur actif
         afficherPlateau();
-        System.out.println("choisir piece");
+        System.out.println("C'est au tour du joueur " + (J_actif.getCouleur() == 'B' ? "Blanc" : "Noir"));
+
+        // Vérification de la condition de victoire après chaque tour
+        char victoire = Victoire_Chateau();
+        if (victoire != ' ') {
+            System.out.println("Le joueur " + (victoire == 'B' ? "Blanc" : "Noir") + " a gagne ! Partie terminee.");
+            break; // Sortir de la boucle si la condition de victoire est remplie
+        }
+
+        // Vérification si le joueur actif n'a plus de pièces, dans ce cas l'autre joueur gagne
+        victoire = Victoire_platVide();
+        if (victoire != ' ') {
+            System.out.println("Le joueur " + (victoire == 'B' ? "Blanc" : "Noir") + " a gagne ! Partie terminee.");
+            break; // Sortir de la boucle si la condition de victoire est remplie
+        }
+
+        // Demander au joueur actif de faire son mouvement
+        System.out.println("Choisissez la piece a deplacer (coordonnees x1 y1) :");
         int x1 = sc.nextInt();
         int y1 = sc.nextInt();
-        System.out.println("bouger(1) ou manger(2)? ou charge du cavalier(3)");
-        int rep = sc.nextInt();
-        if(rep==1){
-            System.out.println("coord d'arrivee");
+        System.out.println("Choisir action : 1 - Deplacer, 2 - Capturer, 3 - Charger le cavalier");
+        int action = sc.nextInt();
+
+        // Actions en fonction de l'entrée de l'utilisateur
+        if (action == 1) {
+            System.out.println("Entrer les coordonnees d'arrivee (x2 y2) :");
             int x2 = sc.nextInt();
             int y2 = sc.nextInt();
-            Plateau[x1][y1].deplacerPiece(Plateau,x2,y2);
-            
-            afficherPlateau();
-        }
-        if(rep == 2){
-            System.out.println("coord d'arrivee");
+            Plateau[x1][y1].deplacerPiece(Plateau, x2, y2);
+        } else if (action == 2) {
+            System.out.println("Entrer les coordonnees d'arrivee pour la capture (x2 y2) :");
             int x2 = sc.nextInt();
             int y2 = sc.nextInt();
-            boolean cap =Plateau[x1][y1].capture(Plateau,x2,y2);
-            if (cap == true){
-                Plateau[x2][y2].capture_chaine(Plateau);
-            }
-        }
-        if(rep==3){
-            Cavalier cavalier = (Cavalier)Plateau[x1][y1];
+            Plateau[x1][y1].capture(Plateau, x2, y2);
+        } else if (action == 3) {
+            // Charger le cavalier
+            Cavalier cavalier = (Cavalier) Plateau[x1][y1];
             cavalier.chargeCavalier(Plateau);
         }
-        Victoire_Chateau();
+
+        // Changer de tour après chaque action
+        changerTour();
     }
+}
 }
