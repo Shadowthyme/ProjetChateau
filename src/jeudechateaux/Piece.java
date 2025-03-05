@@ -60,6 +60,7 @@ abstract class Piece {
     public boolean capture(Piece[][] Plateau, int x2, int y2) {
         int dx = Math.abs(x2 - coordx);
         int dy = Math.abs(y2 - coordy);
+        boolean capture = false;
 
         // Capture (saut par-dessus une pièce adverse)
         if ((dx == 2 && dy == 0) || (dx == 0 && dy == 2) || (dx == 2 && dy == 2)) {
@@ -73,19 +74,18 @@ abstract class Piece {
                     Plateau[coordx][coordy] = null;
                     coordx = x2;
                     coordy = y2;
-                    return true;
+                    capture = true;
                 }
             }
         }
-
-        System.out.println("Deplacement invalide !");
-        return false;
+        
+        return capture;
     }
 
     public boolean capture_chaine(Piece[][] Plateau) {
         Scanner sc = new Scanner(System.in);
         boolean fin = false;
-        while (fin = false) {
+        while (fin == false) {
             System.out.println("Voulez vous capturer a nouveau?");
             System.out.println("1 - Oui");
             System.out.println("2 - Non");
