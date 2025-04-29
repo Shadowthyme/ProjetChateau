@@ -3,6 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package pfiches;
+import ptraitement.Jeu;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.Random;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import ptraitement.Joueur;
 
 /**
  *
@@ -13,11 +23,52 @@ public class Fjeu extends javax.swing.JDialog {
     /**
      * Creates new form Fjeu
      */
+    private JButton [][]tab=new JButton[13][7];
+        private Jeu monJeu;
+    
     public Fjeu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    }
-
+        
+}
+    
+    
+    public void initialiser(String pseudo1, String pseudo2){
+        char couleur1 = new Random().nextBoolean() ? 'N' : 'B';
+        char couleur2;
+        if (couleur1 == 'N') {
+            couleur2 = 'B';
+        } else {
+            couleur2 = 'N';
+        }
+        Joueur Joueur1 = new Joueur(pseudo1, 7, couleur1);
+        Joueur Joueur2 = new Joueur(pseudo2, 7, couleur2);
+        monJeu = new Jeu(Joueur1, Joueur2);
+        GridLayout get = new GridLayout(13, 7);
+        pPlateau.setLayout(get);
+        for (int i = 0; i < 13; i++) {
+            for (int j = 0; j < 7; j++) {
+                JButton coup = new JButton();
+                Dimension dim = new Dimension(50, 50);
+                coup.setPreferredSize(dim);
+                coup.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                pPlateau.add(coup);
+                tab[i][j]=coup;
+            }
+        }
+        this.pack();
+        
+        for(int i = 0; i < tab.length; i++){
+            for (int j = 0; j < tab[i].length; j++) {
+                tab[i][j].setActionCommand(i + "," + j);
+            }
+        }
+    }    
+        
+public void afficherPlateau(){
+    Jeu monJeu=((Faccueil)getParent()).getMonJeu();
+    monJeu.afficher(tab);
+}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

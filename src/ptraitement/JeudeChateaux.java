@@ -26,7 +26,7 @@ public class JeudeChateaux {
         } else {
             couleur2 = 'N';
         }
-        Joueur Joueur1 = new Joueur(pseudo1, 0, couleur1);
+        Joueur Joueur1 = new Joueur(pseudo1, 7, couleur1);
         Joueur Joueur2 = new Joueur(pseudo2, 7, couleur2);
         Joueur Joueur_actif;
         if (Joueur1.getCouleur() == 'B') {
@@ -35,7 +35,7 @@ public class JeudeChateaux {
             Joueur_actif = Joueur2;
         }
 
-        Jeu jeu = new Jeu(Joueur1, Joueur2, Joueur_actif);
+        Jeu jeu = new Jeu(Joueur1, Joueur2);
         jeu.Generer_plateau();
 
         jeu.BoucleJeu();

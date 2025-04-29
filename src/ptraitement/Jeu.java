@@ -13,11 +13,11 @@ public class Jeu {
     private Joueur J_actif;
     private String nomFichier;
 
-    public Jeu(Joueur Joueur1, Joueur Joueur2, Joueur Joueur_actif) {
+    public Jeu(Joueur Joueur1, Joueur Joueur2) {
+        //, Joueur Joueur_actif             this.J_actif = Joueur_actif;
         this.Plateau = new Piece[13][7];
         this.Joueur1 = Joueur1;
         this.Joueur2 = Joueur2;
-        this.J_actif = Joueur_actif;
         this.nomFichier = "partie.txt";
     }
 

@@ -3,20 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package pfiches;
+import ptraitement.Jeu;
 
 /**
  *
  * @author hugor
  */
 public class Faccueil extends javax.swing.JFrame {
+    private Fjeu fichJeu;
+    private Jeu monJeu;
 
-    /**
-     * Creates new form Faccueil
-     */
+
     public Faccueil() {
         initComponents();
+        fichJeu=new Fjeu(this,false);
     }
-
+    public Fjeu getFichJeu(){return fichJeu;}
+    public Jeu getMonJeu(){return monJeu;}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
