@@ -4,15 +4,35 @@
  */
 package pfiches;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+
 /**
  *
  * @author hugor
  */
 public class FJeu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Faccueil
-     */
+   private JLabel [][]tab=new JLabel[13][7];
+    public Fjeu(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        GridLayout get = new GridLayout(13, 7);
+        pPlateau.setLayout(get);
+        for (int i = 0; i < 13; i++) {
+            for (int j = 0; j < 7; j++) {
+                JLabel coup = new JLabel();
+                Dimension dim = new Dimension(50, 50);
+                coup.setPreferredSize(dim);
+                coup.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                pPlateau.add(coup);
+                tab[i][j]=coup;
+            }
+        }
+        this.pack();
     public FJeu() {
         initComponents();
     }
