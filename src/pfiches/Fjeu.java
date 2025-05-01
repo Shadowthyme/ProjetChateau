@@ -76,7 +76,7 @@ public void afficherPlateau(){
 
         pPlateau = new javax.swing.JPanel();
         bCase = new javax.swing.JButton();
-        bRetour = new javax.swing.JButton();
+        bRetour2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,10 +95,10 @@ public void afficherPlateau(){
 
         bCase.setText("jButton1");
 
-        bRetour.setText("Retour");
-        bRetour.addActionListener(new java.awt.event.ActionListener() {
+        bRetour2.setText("Retour");
+        bRetour2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRetourActionPerformed(evt);
+                bRetour2ActionPerformed(evt);
             }
         });
 
@@ -114,8 +114,8 @@ public void afficherPlateau(){
                 .addGap(60, 60, 60))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bRetour)
-                .addGap(106, 106, 106))
+                .addComponent(bRetour2)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,17 +127,18 @@ public void afficherPlateau(){
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(bCase)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(bRetour)
-                .addGap(66, 66, 66))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addComponent(bRetour2)
+                .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRetourActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bRetourActionPerformed
+    private void bRetour2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRetour2ActionPerformed
+        this.setVisible(false);
+        this.getParent().setVisible(true);
+    }//GEN-LAST:event_bRetour2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,7 +184,7 @@ public void afficherPlateau(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCase;
-    private javax.swing.JButton bRetour;
+    private javax.swing.JButton bRetour2;
     private javax.swing.JPanel pPlateau;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,8 +32,8 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="bRetour" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+              <Component id="bRetour2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,9 +50,9 @@
                       <Component id="bCase" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
-              <Component id="bRetour" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+              <EmptySpace pref="89" max="32767" attributes="0"/>
+              <Component id="bRetour2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,12 +83,12 @@
         <Property name="text" type="java.lang.String" value="jButton1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="bRetour">
+    <Component class="javax.swing.JButton" name="bRetour2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Retour"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bRetourActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bRetour2ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
