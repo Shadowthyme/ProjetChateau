@@ -11,7 +11,7 @@ import ptraitement.Jeu;
  */
 public class Faccueil extends javax.swing.JFrame {
     private Fjeu fichJeu;
-    private FPseudo fichPseudo;
+    private F2Pseudo fichPseudo;
     
     public Faccueil() {
         initComponents();

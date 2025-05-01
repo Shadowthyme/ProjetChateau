@@ -10,11 +10,11 @@ import ptraitement.Jeu;
  *
  * @author eliot
  */
-public class FPseudo extends javax.swing.JFrame {
+public class F2Pseudo extends javax.swing.JFrame {
 
     private Fjeu fichJeu;
     
-    public FPseudo() {
+    public F2Pseudo() {
         initComponents();
         fichJeu=new Fjeu(this,false);
     }
@@ -31,10 +31,10 @@ public class FPseudo extends javax.swing.JFrame {
     private void initComponents() {
 
         Lpseudo1 = new javax.swing.JLabel();
-        Tpseudo1 = new javax.swing.JTextField();
+        T2pseudo1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        bContinuer = new javax.swing.JButton();
+        T2Pseudo2 = new javax.swing.JTextField();
+        bContinuer1 = new javax.swing.JButton();
         bRetour1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,20 +42,20 @@ public class FPseudo extends javax.swing.JFrame {
         Lpseudo1.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
         Lpseudo1.setText("Veuillez entrer le premier pseudo");
 
-        Tpseudo1.addActionListener(new java.awt.event.ActionListener() {
+        T2pseudo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Tpseudo1ActionPerformed(evt);
+                T2pseudo1ActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
         jLabel1.setText("Veuillez entrer le second pseudo");
 
-        bContinuer.setFont(new java.awt.Font("Old English Text MT", 0, 12)); // NOI18N
-        bContinuer.setText("Continuer !");
-        bContinuer.addActionListener(new java.awt.event.ActionListener() {
+        bContinuer1.setFont(new java.awt.Font("Old English Text MT", 0, 12)); // NOI18N
+        bContinuer1.setText("Continuer !");
+        bContinuer1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bContinuerActionPerformed(evt);
+                bContinuer1ActionPerformed(evt);
             }
         });
 
@@ -80,14 +80,14 @@ public class FPseudo extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tpseudo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(T2Pseudo2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(T2pseudo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(bRetour1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bContinuer)
+                        .addComponent(bContinuer1)
                         .addGap(34, 34, 34))))
         );
         layout.setVerticalGroup(
@@ -96,14 +96,14 @@ public class FPseudo extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lpseudo1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tpseudo1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(T2pseudo1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(T2Pseudo2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bContinuer)
+                    .addComponent(bContinuer1)
                     .addComponent(bRetour1))
                 .addGap(16, 16, 16))
         );
@@ -111,15 +111,15 @@ public class FPseudo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Tpseudo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tpseudo1ActionPerformed
+    private void T2pseudo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T2pseudo1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Tpseudo1ActionPerformed
+    }//GEN-LAST:event_T2pseudo1ActionPerformed
 
-    private void bContinuerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bContinuerActionPerformed
+    private void bContinuer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bContinuer1ActionPerformed
         this.setVisible(false);
         fichJeu.setVisible(true);
         fichJeu.afficherPlateau();
-    }//GEN-LAST:event_bContinuerActionPerformed
+    }//GEN-LAST:event_bContinuer1ActionPerformed
 
     private void bRetour1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRetour1ActionPerformed
         this.setVisible(false);
@@ -143,30 +143,33 @@ public class FPseudo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FPseudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(F2Pseudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FPseudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(F2Pseudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FPseudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(F2Pseudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FPseudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(F2Pseudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FPseudo().setVisible(true);
+                new F2Pseudo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Lpseudo1;
-    private javax.swing.JTextField Tpseudo1;
-    private javax.swing.JButton bContinuer;
+    private javax.swing.JTextField T2Pseudo2;
+    private javax.swing.JTextField T2pseudo1;
+    private javax.swing.JButton bContinuer1;
     private javax.swing.JButton bRetour1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
