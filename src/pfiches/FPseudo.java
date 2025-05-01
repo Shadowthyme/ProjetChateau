@@ -13,13 +13,13 @@ import ptraitement.Jeu;
 public class FPseudo extends javax.swing.JFrame {
 
     private Fjeu fichJeu;
-    private Jeu monJeu;
+    
     public FPseudo() {
         initComponents();
         fichJeu=new Fjeu(this,false);
     }
     public Fjeu getFichJeu(){return fichJeu;}
-    public Jeu getMonJeu(){return monJeu;}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

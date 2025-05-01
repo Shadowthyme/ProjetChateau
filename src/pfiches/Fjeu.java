@@ -66,7 +66,7 @@ public class Fjeu extends javax.swing.JDialog {
     }    
         
 public void afficherPlateau(){
-    Jeu monJeu=((Faccueil)getParent()).getMonJeu();
+    Jeu monJeu=((Faccueil)getParent()).getmonJeu();
     monJeu.afficher(tab);
 }
     
