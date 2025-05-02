@@ -11,7 +11,8 @@ import ptraitement.Jeu;
  * @author eliot
  */
 public class F2Pseudo extends javax.swing.JFrame {
-
+String Pseudo1;
+String Pseudo2;
     private Fjeu fichJeu;
     
     public F2Pseudo() {
@@ -50,6 +51,12 @@ public class F2Pseudo extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
         jLabel1.setText("Veuillez entrer le second pseudo");
+
+        T2Pseudo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                T2Pseudo2ActionPerformed(evt);
+            }
+        });
 
         bContinuer1.setFont(new java.awt.Font("Old English Text MT", 0, 12)); // NOI18N
         bContinuer1.setText("Continuer !");
@@ -116,9 +123,13 @@ public class F2Pseudo extends javax.swing.JFrame {
     }//GEN-LAST:event_T2pseudo1ActionPerformed
 
     private void bContinuer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bContinuer1ActionPerformed
+        Pseudo1=T2pseudo1.getText();
+        Pseudo2=T2Pseudo2.getText();
+        
         this.setVisible(false);
         fichJeu.setVisible(true);
         fichJeu.afficherPlateau();
+        
     }//GEN-LAST:event_bContinuer1ActionPerformed
 
     private void bRetour1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRetour1ActionPerformed
@@ -126,9 +137,16 @@ public class F2Pseudo extends javax.swing.JFrame {
         this.getParent().setVisible(true);
     }//GEN-LAST:event_bRetour1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void T2Pseudo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T2Pseudo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_T2Pseudo2ActionPerformed
+
+    public String getpseudo1(){
+        return Pseudo1;
+    }
+    public String getPseudo2(){
+        return Pseudo2;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -13,6 +13,7 @@ private Fjeu fichJeu;
     /**
      * Creates new form F1Pseudo
      */
+String Pseudo1;
     public F1Pseudo() {
         initComponents();
     }
@@ -110,6 +111,7 @@ private Fjeu fichJeu;
     }//GEN-LAST:event_T1Pseudo1ActionPerformed
 
     private void bContinuer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bContinuer2ActionPerformed
+        Pseudo1=T1Pseudo1.getText();
         this.setVisible(false);
         fichJeu.setVisible(true);
         fichJeu.afficherPlateau();
@@ -125,6 +127,9 @@ private Fjeu fichJeu;
     /**
      * @param args the command line arguments
      */
+    public String getpseudo1(){
+        return Pseudo1;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
