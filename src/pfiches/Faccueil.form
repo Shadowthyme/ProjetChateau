@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="BGnbjoueur">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -23,34 +27,62 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+              <Component id="jLabel1" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+          </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="287" max="-2" attributes="0"/>
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="bJouer1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="bJouer2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                  <Component id="Tpseudo1" min="-2" pref="111" max="-2" attributes="0"/>
+                  <Component id="Tpseudo2" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="Lpseudo1" max="32767" attributes="0"/>
+                      <Component id="Lpseudo2" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace pref="144" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="RB2joueurs" min="-2" pref="142" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="RB1joueur" min="-2" pref="181" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
+              <Component id="Bcommencer" min="-2" pref="121" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="169" max="-2" attributes="0"/>
-              <EmptySpace pref="45" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="121" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="Lpseudo1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bJouer1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bJouer2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Tpseudo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="RB2joueurs" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="Lpseudo2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Tpseudo2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="RB1joueur" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="72" max="32767" attributes="0"/>
+              <Component id="Bcommencer" min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,27 +100,50 @@
         <Property name="text" type="java.lang.String" value="Jeu De Chateau"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="bJouer1">
+    <Component class="javax.swing.JRadioButton" name="RB1joueur">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Old English Text MT" size="14" style="2"/>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="BGnbjoueur"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="1 Joueur"/>
+        <Property name="text" type="java.lang.String" value="Joueur contre Ordinateur"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bJouer1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RB1joueurActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="bJouer2">
+    <Component class="javax.swing.JRadioButton" name="RB2joueurs">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Old English Text MT" size="14" style="2"/>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="BGnbjoueur"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="2 Joueurs"/>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Joueur contre Joueur"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="Tpseudo1">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="Tpseudo2">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bJouer2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Tpseudo2ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Lpseudo2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ins&#xe9;rer le pseudo du joueur 2!"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Lpseudo1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ins&#xe9;rer le pseudo du joueur 1!"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="Bcommencer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="COMMENCER"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

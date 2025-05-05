@@ -19,7 +19,7 @@ public class Faccueil extends javax.swing.JFrame {
     public Faccueil() {
         initComponents();
         fichJeu=new Fjeu(this,false);
-        fichPseudo = new F2Pseudo();
+        fichPseudo = new F2Pseudo(this);
         
     }
     public Fjeu getFichJeu(){return fichJeu;}
@@ -33,9 +33,15 @@ public class Faccueil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BGnbjoueur = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        bJouer1 = new javax.swing.JButton();
-        bJouer2 = new javax.swing.JButton();
+        RB1joueur = new javax.swing.JRadioButton();
+        RB2joueurs = new javax.swing.JRadioButton();
+        Tpseudo1 = new javax.swing.JTextField();
+        Tpseudo2 = new javax.swing.JTextField();
+        Lpseudo2 = new javax.swing.JLabel();
+        Lpseudo1 = new javax.swing.JLabel();
+        Bcommencer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,62 +50,93 @@ public class Faccueil extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Jeu De Chateau");
 
-        bJouer1.setFont(new java.awt.Font("Old English Text MT", 2, 14)); // NOI18N
-        bJouer1.setText("1 Joueur");
-        bJouer1.addActionListener(new java.awt.event.ActionListener() {
+        BGnbjoueur.add(RB1joueur);
+        RB1joueur.setText("Joueur contre Ordinateur");
+        RB1joueur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bJouer1ActionPerformed(evt);
+                RB1joueurActionPerformed(evt);
             }
         });
 
-        bJouer2.setFont(new java.awt.Font("Old English Text MT", 2, 14)); // NOI18N
-        bJouer2.setText("2 Joueurs");
-        bJouer2.addActionListener(new java.awt.event.ActionListener() {
+        BGnbjoueur.add(RB2joueurs);
+        RB2joueurs.setSelected(true);
+        RB2joueurs.setText("Joueur contre Joueur");
+
+        Tpseudo1.setToolTipText("");
+
+        Tpseudo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bJouer2ActionPerformed(evt);
+                Tpseudo2ActionPerformed(evt);
             }
         });
+
+        Lpseudo2.setText("Insérer le pseudo du joueur 2!");
+
+        Lpseudo1.setText("Insérer le pseudo du joueur 1!");
+
+        Bcommencer.setText("COMMENCER");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(40, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bJouer1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bJouer2)
-                        .addGap(74, 74, 74))))
+                    .addComponent(Tpseudo1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tpseudo2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Lpseudo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Lpseudo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(RB2joueurs, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(RB1joueur, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(209, 209, 209)
+                .addComponent(Bcommencer, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(Lpseudo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bJouer1)
-                    .addComponent(bJouer2))
-                .addGap(47, 47, 47))
+                    .addComponent(Tpseudo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RB2joueurs))
+                .addGap(32, 32, 32)
+                .addComponent(Lpseudo2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Tpseudo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RB1joueur, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(Bcommencer, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bJouer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bJouer1ActionPerformed
-        this.setVisible(false);
-        fichPseudo.setVisible(true);
-    }//GEN-LAST:event_bJouer1ActionPerformed
+    private void Tpseudo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tpseudo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tpseudo2ActionPerformed
 
-    private void bJouer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bJouer2ActionPerformed
-        this.setVisible(false);
-        fichPseudo.setVisible(true);
-    }//GEN-LAST:event_bJouer2ActionPerformed
+    private void RB1joueurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB1joueurActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RB1joueurActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,8 +174,14 @@ public class Faccueil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bJouer1;
-    private javax.swing.JButton bJouer2;
+    private javax.swing.ButtonGroup BGnbjoueur;
+    private javax.swing.JButton Bcommencer;
+    private javax.swing.JLabel Lpseudo1;
+    private javax.swing.JLabel Lpseudo2;
+    private javax.swing.JRadioButton RB1joueur;
+    private javax.swing.JRadioButton RB2joueurs;
+    private javax.swing.JTextField Tpseudo1;
+    private javax.swing.JTextField Tpseudo2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

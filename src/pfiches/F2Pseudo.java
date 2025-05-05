@@ -11,12 +11,15 @@ import ptraitement.Jeu;
  * @author eliot
  */
 public class F2Pseudo extends javax.swing.JFrame {
+
 String Pseudo1;
 String Pseudo2;
 Fjeu fichJeu = ((Faccueil) getParent()).getFichJeu();
     
-    public F2Pseudo() {
+    public F2Pseudo(Faccueil parent) {
+        super(parent, true);
         initComponents();
+        this.setParent(parent);
         fichJeu=new Fjeu(this,false);
     }
     public Fjeu getFichJeu(){return fichJeu;}
