@@ -1,6 +1,8 @@
 package ptraitement;
 
+import java.awt.Toolkit;
 import java.util.Scanner;
+import static ptraitement.Piece.DOSS_IMAGES;
 
 /**
  *
@@ -61,7 +63,30 @@ public class Jeu {
             }
         }
     }
+public void afficher(){
+        Toolkit t = Toolkit.getDefaultToolkit();
+        String cavaB="CavalierB.jpg";
+        String cavaN="CavalierN.png";
+        String pionB="pionB.png";
+        String pionN="pionN.png";
+        
+        if (piece !=null && pion.getVie()){
+            if ( pion instanceof Cavalier){
+                if(pion.getCouleur()=='B'){
+                    img=t.getImage(DOSS_IMAGES+cavaB);
+}else{
+                    img=t.getImage(DOSS_IMAGES+cavaN);
+}
+}
+else{
+if(pion.getCouleur()=='B'){
+    img=t.getImage(DOSS_IMAGES+pionB);
+}else{
+    img=t.getIMAGE(DOSS_IMAGES+pionN);
 
+                }
+            }
+        }
     public void afficherPlateau() {
         System.out.println("   A  B  C  D  E  F  G"); // En-tête des colonnes
         for (int i = 0; i < Plateau.length; i++) {

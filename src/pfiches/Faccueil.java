@@ -4,6 +4,7 @@
  */
 package pfiches;
 import ptraitement.Jeu;
+import ptraitement.Joueur;
 
 /**
  *
@@ -12,12 +13,16 @@ import ptraitement.Jeu;
 public class Faccueil extends javax.swing.JFrame {
     private Fjeu fichJeu;
     private F2Pseudo fichPseudo;
+    private Jeu monJeu;
+
     
     public Faccueil() {
         initComponents();
         fichJeu=new Fjeu(this,false);
+        
     }
     public Fjeu getFichJeu(){return fichJeu;}
+    public Jeu getMonJeu(){return monJeu;}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

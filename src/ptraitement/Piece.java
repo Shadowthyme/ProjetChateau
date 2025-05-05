@@ -1,5 +1,6 @@
 package ptraitement;
 
+import java.awt.Toolkit;
 import java.util.Scanner;
 
 /**
@@ -10,13 +11,17 @@ abstract class Piece {
 
     private char couleur;
     protected int coordx, coordy;
-
+    public static final String DOSS_IMAGES = "src/pimages/";
+            
     public Piece(char couleur, int coordx, int coordy) {
         this.couleur = couleur;
         this.coordx = coordx;
         this.coordy = coordy;
     }
 
+    
+    
+            
     public char getCouleur() { //méthode pour savoir de quelle couleur est une pièce (Noir ou Blanc)
         return this.couleur;
     }

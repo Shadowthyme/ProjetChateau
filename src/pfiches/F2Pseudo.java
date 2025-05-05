@@ -127,6 +127,7 @@ String Pseudo2;
         Pseudo2=T2Pseudo2.getText();
         
         this.setVisible(false);
+        fichJeu.initialiser(Pseudo1, Pseudo2);
         fichJeu.setVisible(true);
         fichJeu.afficherPlateau();
         

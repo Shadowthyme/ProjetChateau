@@ -4,7 +4,7 @@
  */
 package pfiches;
 import ptraitement.Jeu;
-
+import ptraitement.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -20,9 +20,6 @@ import ptraitement.Joueur;
  */
 public class Fjeu extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Fjeu
-     */
     private JButton [][]tab=new JButton[13][7];
         private Jeu monJeu;
     
@@ -66,8 +63,7 @@ public class Fjeu extends javax.swing.JDialog {
     }    
         
 public void afficherPlateau(){
-    Jeu monJeu=((Faccueil)getParent()).getmonJeu();
-    monJeu.afficher(tab);
+    afficherPlateau(tab);
 }
     
     @SuppressWarnings("unchecked")
