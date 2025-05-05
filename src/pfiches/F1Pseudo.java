@@ -9,7 +9,7 @@ package pfiches;
  * @author eliot
  */
 public class F1Pseudo extends javax.swing.JFrame {
-private Fjeu fichJeu;
+Fjeu fichJeu = ((Faccueil) getParent()).getFichJeu();
     /**
      * Creates new form F1Pseudo
      */

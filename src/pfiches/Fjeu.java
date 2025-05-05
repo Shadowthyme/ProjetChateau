@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package pfiches;
+
 import ptraitement.Jeu;
 import ptraitement.*;
 import java.awt.Color;
@@ -10,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Random;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import ptraitement.Joueur;
@@ -20,17 +22,17 @@ import ptraitement.Joueur;
  */
 public class Fjeu extends javax.swing.JDialog {
 
-    private JButton [][]tab=new JButton[13][7];
-        private Jeu monJeu;
-    
+    private JButton[][] tab = new JButton[13][7];
+    private Jeu monJeu;
+
     public Fjeu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-}
-    
-    
-    public void initialiser(String pseudo1, String pseudo2){
+        initialiser("Joueur1","Joueur2");
+        afficherPlateau();
+    }
+
+    public void initialiser(String pseudo1, String pseudo2) {
         char couleur1 = new Random().nextBoolean() ? 'N' : 'B';
         char couleur2;
         if (couleur1 == 'N') {
@@ -50,22 +52,45 @@ public class Fjeu extends javax.swing.JDialog {
                 coup.setPreferredSize(dim);
                 coup.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 pPlateau.add(coup);
-                tab[i][j]=coup;
+                tab[i][j] = coup;
             }
         }
         this.pack();
-        
-        for(int i = 0; i < tab.length; i++){
+
+        for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab[i].length; j++) {
                 tab[i][j].setActionCommand(i + "," + j);
             }
         }
-    }    
-        
-public void afficherPlateau(){
-    afficherPlateau(tab);
-}
+    }
+
+    public void afficherPlateau() {
+        Piece[][] plateau = monJeu.getPlateau(); // Récupère l'état actuel du plateau
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = 0; j < tab[i].length; j++) {
+                // Remplir les boutons avec des images
+                if (plateau[i][j] instanceof Pion) {
+                    Pion pion = (Pion) plateau[i][j];
+                    if (pion.getCouleur() == 'B') {
+                        tab[i][j].setIcon(new ImageIcon("src/images/pionB.jpg")); // Image pour un pion blanc
+                    } else {
+                        tab[i][j].setIcon(new ImageIcon("src/images/pionN.jpg")); // Image pour un pion noir
+                    }
+                } else if (plateau[i][j] instanceof Cavalier) {
+                    Cavalier cavalier = (Cavalier) plateau[i][j];
+                    if (cavalier.getCouleur() == 'B') {
+                        tab[i][j].setIcon(new ImageIcon("src/images/CavalierB.jpg")); // Image pour un cavalier blanc
+                    } else {
+                        tab[i][j].setIcon(new ImageIcon("src/images/CavalierN.jpg")); // Image pour un cavalier noir
+                    }
+                }
+                tab[i][j].setText(""); // Efface tout texte sur le bouton
+            }
+        }
+    }
     
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -105,9 +130,9 @@ public void afficherPlateau(){
             .addGroup(layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(pPlateau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(bCase)
-                .addGap(60, 60, 60))
+                .addGap(64, 64, 64))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bRetour2)
@@ -121,7 +146,7 @@ public void afficherPlateau(){
                         .addGap(57, 57, 57)
                         .addComponent(pPlateau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
+                        .addGap(71, 71, 71)
                         .addComponent(bCase)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(bRetour2)

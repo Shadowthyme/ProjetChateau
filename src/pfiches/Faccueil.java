@@ -19,6 +19,7 @@ public class Faccueil extends javax.swing.JFrame {
     public Faccueil() {
         initComponents();
         fichJeu=new Fjeu(this,false);
+        fichPseudo = new F2Pseudo();
         
     }
     public Fjeu getFichJeu(){return fichJeu;}

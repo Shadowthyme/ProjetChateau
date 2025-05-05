@@ -7,7 +7,7 @@ import java.util.Scanner;
  *
  * @author hugor
  */
-abstract class Piece {
+public abstract class Piece {
 
     private char couleur;
     protected int coordx, coordy;

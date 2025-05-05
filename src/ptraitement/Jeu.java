@@ -63,7 +63,7 @@ public class Jeu {
             }
         }
     }
-public void afficher(){
+/*public void afficher(){
         Toolkit t = Toolkit.getDefaultToolkit();
         String cavaB="CavalierB.jpg";
         String cavaN="CavalierN.png";
@@ -87,6 +87,7 @@ if(pion.getCouleur()=='B'){
                 }
             }
         }
+*/
     public void afficherPlateau() {
         System.out.println("   A  B  C  D  E  F  G"); // En-tête des colonnes
         for (int i = 0; i < Plateau.length; i++) {

@@ -8,7 +8,7 @@ package ptraitement;
  *
  * @author hugor
  */
-    class Pion extends Piece {
+    public class Pion extends Piece {
 
     public Pion(char couleur, int coordx, int coordy) {
         super(couleur, coordx, coordy);

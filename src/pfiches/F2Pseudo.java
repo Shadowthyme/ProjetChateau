@@ -13,7 +13,7 @@ import ptraitement.Jeu;
 public class F2Pseudo extends javax.swing.JFrame {
 String Pseudo1;
 String Pseudo2;
-    private Fjeu fichJeu;
+Fjeu fichJeu = ((Faccueil) getParent()).getFichJeu();
     
     public F2Pseudo() {
         initComponents();
@@ -127,9 +127,6 @@ String Pseudo2;
         Pseudo2=T2Pseudo2.getText();
         
         this.setVisible(false);
-        fichJeu.initialiser(Pseudo1, Pseudo2);
-        fichJeu.setVisible(true);
-        fichJeu.afficherPlateau();
         
     }//GEN-LAST:event_bContinuer1ActionPerformed
 
