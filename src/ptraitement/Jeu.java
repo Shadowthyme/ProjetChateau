@@ -21,6 +21,7 @@ public class Jeu {
         this.Joueur1 = Joueur1;
         this.Joueur2 = Joueur2;
         this.nomFichier = "partie.txt";
+        J_actif = this.Joueur1;
     }
 
     public void Generer_plateau() {

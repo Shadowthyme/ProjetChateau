@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,46 +27,44 @@ public class Fjeu extends javax.swing.JDialog {
 
     private JButton[][] tab = new JButton[13][7];
     private Jeu monJeu;
+    private int[] selectedPiece = null; // Initialisé à null au départ
 
     public Fjeu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        initialiser("Joueur1","Joueur2");
+        initialiser("Joueur1", "Joueur2");
         monJeu.Generer_plateau();
         afficherPlateau();
     }
 
     public void initialiser(String pseudo1, String pseudo2) {
         char couleur1 = new Random().nextBoolean() ? 'N' : 'B';
-        char couleur2;
-        if (couleur1 == 'N') {
-            couleur2 = 'B';
-        } else {
-            couleur2 = 'N';
-        }
-        Joueur Joueur1 = new Joueur(pseudo1, 7, couleur1);
-        Joueur Joueur2 = new Joueur(pseudo2, 7, couleur2);
-        monJeu = new Jeu(Joueur1, Joueur2);
-        GridLayout get = new GridLayout(13, 7);
-        pPlateau.setLayout(get);
+        char couleur2 = couleur1 == 'N' ? 'B' : 'N';
+
+        Joueur joueur1 = new Joueur(pseudo1, 7, couleur1);
+        Joueur joueur2 = new Joueur(pseudo2, 7, couleur2);
+        monJeu = new Jeu(joueur1, joueur2);
+
+        GridLayout layout = new GridLayout(13, 7);
+        pPlateau.setLayout(layout);
+
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 7; j++) {
-                JButton coup = new JButton();
-                Dimension dim = new Dimension(50, 50);
-                coup.setPreferredSize(dim);
-                coup.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                pPlateau.add(coup);
-                tab[i][j] = coup;
+                JButton bouton = new JButton();
+                bouton.setPreferredSize(new Dimension(50, 50));
+                bouton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                bouton.setActionCommand(i + "," + j);
+                bouton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        handleButtonClick(e);
+                    }
+                });
+                pPlateau.add(bouton);
+                tab[i][j] = bouton;
             }
         }
         this.pack();
-
-        for (int i = 0; i < tab.length; i++) {
-            for (int j = 0; j < tab[i].length; j++) {
-                tab[i][j].setActionCommand(i + "," + j);
-            }
-        }
-        
     }
 
     public void afficherPlateau() {
@@ -72,31 +72,62 @@ public class Fjeu extends javax.swing.JDialog {
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab[i].length; j++) {
                 // Remplir les boutons avec des images
+                if (plateau[i][j] instanceof Case_Vide){
+                    tab[i][j].setIcon(null);
+                }
                 if (plateau[i][j] instanceof Pion) {
                     Pion pion = (Pion) plateau[i][j];
                     if (pion.getCouleur() == 'B') {
-                        tab[i][j].setIcon(redimensionnerImage("src/pimages/pionB.png",45,45)); // Image pour un pion blanc
+                        tab[i][j].setIcon(redimensionnerImage("src/pimages/pionB.png", 45, 45)); // Image pour un pion blanc
                     } else {
-                        tab[i][j].setIcon(redimensionnerImage("src/pimages/pionN.png",45,45)); // Image pour un pion noir
+                        tab[i][j].setIcon(redimensionnerImage("src/pimages/pionN.png", 45, 45)); // Image pour un pion noir
                     }
                 } else if (plateau[i][j] instanceof Cavalier) {
                     Cavalier cavalier = (Cavalier) plateau[i][j];
                     if (cavalier.getCouleur() == 'B') {
-                        tab[i][j].setIcon(redimensionnerImage("src/pimages/CavalierB.png",45,45)); // Image pour un cavalier blanc
+                        tab[i][j].setIcon(redimensionnerImage("src/pimages/CavalierB.png", 45, 45)); // Image pour un cavalier blanc
                     } else {
-                        tab[i][j].setIcon(redimensionnerImage("src/pimages/CavalierN.png",45,45)); // Image pour un cavalier noir
+                        tab[i][j].setIcon(redimensionnerImage("src/pimages/CavalierN.png", 45, 45)); // Image pour un cavalier noir
                     }
                 }
                 tab[i][j].setText(""); // Efface tout texte sur le bouton
             }
         }
     }
-    
+
     private ImageIcon redimensionnerImage(String chemin, int largeur, int hauteur) {
-    ImageIcon icon = new ImageIcon(chemin);
-    Image img = icon.getImage().getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
-    return new ImageIcon(img);
-}
+        ImageIcon icon = new ImageIcon(chemin);
+        Image img = icon.getImage().getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
+    }
+
+    private void handleButtonClick(ActionEvent e) {
+        String[] coords = e.getActionCommand().split(",");
+        int x = Integer.parseInt(coords[0]);
+        int y = Integer.parseInt(coords[1]);
+
+        if (selectedPiece == null) {
+            // Première sélection : vérifier qu'une pièce du joueur actif est sélectionnée
+            if (monJeu.getPlateau()[x][y] != null
+                    && monJeu.getPlateau()[x][y].getCouleur() == monJeu.getJoueurActif().getCouleur()) {
+                selectedPiece = new int[]{x, y};  // Définir les coordonnées de la pièce sélectionnée
+                tab[x][y].setBorder(BorderFactory.createLineBorder(Color.RED, 2)); // Marquer la pièce sélectionnée
+            }
+        } else {
+            // Deuxième clic : tenter de déplacer la pièce sélectionnée
+            Piece selected = monJeu.getPlateau()[selectedPiece[0]][selectedPiece[1]];
+            boolean moved = selected.deplacerPiece(monJeu.getPlateau(), x, y); // Effectuer le déplacement
+
+            if (moved) {
+                monJeu.changerTour(); // Passer au joueur suivant
+                afficherPlateau(); // Mettre à jour l'affichage du plateau
+            }
+
+            // Réinitialiser la sélection
+            tab[selectedPiece[0]][selectedPiece[1]].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            selectedPiece = null; // Réinitialiser à null après l'action
+        }
+    }
 
 
     @SuppressWarnings("unchecked")
