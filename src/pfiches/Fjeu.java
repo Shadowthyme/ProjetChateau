@@ -29,6 +29,7 @@ public class Fjeu extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         initialiser("Joueur1","Joueur2");
+        monJeu.Generer_plateau();
         afficherPlateau();
     }
 
@@ -62,6 +63,7 @@ public class Fjeu extends javax.swing.JDialog {
                 tab[i][j].setActionCommand(i + "," + j);
             }
         }
+        
     }
 
     public void afficherPlateau() {
@@ -72,16 +74,16 @@ public class Fjeu extends javax.swing.JDialog {
                 if (plateau[i][j] instanceof Pion) {
                     Pion pion = (Pion) plateau[i][j];
                     if (pion.getCouleur() == 'B') {
-                        tab[i][j].setIcon(new ImageIcon("src/images/pionB.jpg")); // Image pour un pion blanc
+                        tab[i][j].setIcon(new ImageIcon("src/pimages/pionB.jpg")); // Image pour un pion blanc
                     } else {
-                        tab[i][j].setIcon(new ImageIcon("src/images/pionN.jpg")); // Image pour un pion noir
+                        tab[i][j].setIcon(new ImageIcon("src/pimages/pionN.jpg")); // Image pour un pion noir
                     }
                 } else if (plateau[i][j] instanceof Cavalier) {
                     Cavalier cavalier = (Cavalier) plateau[i][j];
                     if (cavalier.getCouleur() == 'B') {
-                        tab[i][j].setIcon(new ImageIcon("src/images/CavalierB.jpg")); // Image pour un cavalier blanc
+                        tab[i][j].setIcon(new ImageIcon("src/pimages/CavalierB.jpg")); // Image pour un cavalier blanc
                     } else {
-                        tab[i][j].setIcon(new ImageIcon("src/images/CavalierN.jpg")); // Image pour un cavalier noir
+                        tab[i][j].setIcon(new ImageIcon("src/pimages/CavalierN.jpg")); // Image pour un cavalier noir
                     }
                 }
                 tab[i][j].setText(""); // Efface tout texte sur le bouton
@@ -131,12 +133,10 @@ public class Fjeu extends javax.swing.JDialog {
                 .addGap(93, 93, 93)
                 .addComponent(pPlateau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(bCase)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bCase)
+                    .addComponent(bRetour2))
                 .addGap(64, 64, 64))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bRetour2)
-                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,10 +147,10 @@ public class Fjeu extends javax.swing.JDialog {
                         .addComponent(pPlateau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
-                        .addComponent(bCase)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addComponent(bRetour2)
-                .addGap(31, 31, 31))
+                        .addComponent(bCase)
+                        .addGap(18, 18, 18)
+                        .addComponent(bRetour2)))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         pack();

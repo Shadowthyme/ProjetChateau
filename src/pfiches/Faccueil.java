@@ -13,6 +13,8 @@ import ptraitement.Joueur;
 public class Faccueil extends javax.swing.JFrame {
     private Fjeu fichJeu;
     private Jeu monJeu;
+    private String pseudo1;
+    private String pseudo2;
 
     
     public Faccueil() {
@@ -149,9 +151,11 @@ public class Faccueil extends javax.swing.JFrame {
     }//GEN-LAST:event_RB1joueurActionPerformed
 
     private void BcommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BcommencerActionPerformed
+        pseudo1 = Tpseudo1.getText();
+        pseudo2 = Tpseudo2.getText();
         this.setVisible(false);
         fichJeu.setVisible(true);
-        fichJeu.afficherPlateau();
+        
     }//GEN-LAST:event_BcommencerActionPerformed
 
     private void RB2joueursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB2joueursActionPerformed
@@ -193,7 +197,9 @@ public class Faccueil extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public String getPseudo1(){return pseudo1;}
+    public String getPseudo2(){return pseudo2;}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BGnbjoueur;
     private javax.swing.JButton Bcommencer;
