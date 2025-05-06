@@ -9,6 +9,7 @@ import ptraitement.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -74,16 +75,16 @@ public class Fjeu extends javax.swing.JDialog {
                 if (plateau[i][j] instanceof Pion) {
                     Pion pion = (Pion) plateau[i][j];
                     if (pion.getCouleur() == 'B') {
-                        tab[i][j].setIcon(new ImageIcon("src/pimages/pionB.jpg")); // Image pour un pion blanc
+                        tab[i][j].setIcon(redimensionnerImage("src/pimages/pionB.png",45,45)); // Image pour un pion blanc
                     } else {
-                        tab[i][j].setIcon(new ImageIcon("src/pimages/pionN.jpg")); // Image pour un pion noir
+                        tab[i][j].setIcon(redimensionnerImage("src/pimages/pionN.png",45,45)); // Image pour un pion noir
                     }
                 } else if (plateau[i][j] instanceof Cavalier) {
                     Cavalier cavalier = (Cavalier) plateau[i][j];
                     if (cavalier.getCouleur() == 'B') {
-                        tab[i][j].setIcon(new ImageIcon("src/pimages/CavalierB.jpg")); // Image pour un cavalier blanc
+                        tab[i][j].setIcon(redimensionnerImage("src/pimages/CavalierB.png",45,45)); // Image pour un cavalier blanc
                     } else {
-                        tab[i][j].setIcon(new ImageIcon("src/pimages/CavalierN.jpg")); // Image pour un cavalier noir
+                        tab[i][j].setIcon(redimensionnerImage("src/pimages/CavalierN.png",45,45)); // Image pour un cavalier noir
                     }
                 }
                 tab[i][j].setText(""); // Efface tout texte sur le bouton
@@ -91,6 +92,11 @@ public class Fjeu extends javax.swing.JDialog {
         }
     }
     
+    private ImageIcon redimensionnerImage(String chemin, int largeur, int hauteur) {
+    ImageIcon icon = new ImageIcon(chemin);
+    Image img = icon.getImage().getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
+    return new ImageIcon(img);
+}
 
 
     @SuppressWarnings("unchecked")
