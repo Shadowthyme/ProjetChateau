@@ -12,14 +12,12 @@ import ptraitement.Joueur;
  */
 public class Faccueil extends javax.swing.JFrame {
     private Fjeu fichJeu;
-    private F2Pseudo fichPseudo;
     private Jeu monJeu;
 
     
     public Faccueil() {
         initComponents();
         fichJeu=new Fjeu(this,false);
-        fichPseudo = new F2Pseudo(this);
         
     }
     public Fjeu getFichJeu(){return fichJeu;}
@@ -40,7 +38,6 @@ public class Faccueil extends javax.swing.JFrame {
         Tpseudo1 = new javax.swing.JTextField();
         Lpseudo1 = new javax.swing.JLabel();
         Bcommencer = new javax.swing.JButton();
-        Panel1 = new javax.swing.JPanel();
         Lpseudo2 = new javax.swing.JLabel();
         Tpseudo2 = new javax.swing.JTextField();
 
@@ -87,27 +84,6 @@ public class Faccueil extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout Panel1Layout = new javax.swing.GroupLayout(Panel1);
-        Panel1.setLayout(Panel1Layout);
-        Panel1Layout.setHorizontalGroup(
-            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel1Layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
-                .addGroup(Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Tpseudo2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lpseudo2))
-                .addGap(43, 43, 43))
-        );
-        Panel1Layout.setVerticalGroup(
-            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Panel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(Lpseudo2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(Tpseudo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,29 +93,26 @@ public class Faccueil extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
+                        .addComponent(Lpseudo2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Tpseudo1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lpseudo1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(RB1joueur, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(RB2joueurs, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(244, 244, 244)
-                .addComponent(Bcommencer, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(Lpseudo1)
+                            .addComponent(Tpseudo2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Bcommencer, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(RB1joueur, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addContainerGap())
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(RB2joueurs, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(41, 41, 41)))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,16 +125,15 @@ public class Faccueil extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Tpseudo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RB2joueurs))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(RB1joueur, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
+                .addComponent(Lpseudo2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RB1joueur, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tpseudo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addComponent(Bcommencer, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,7 +144,8 @@ public class Faccueil extends javax.swing.JFrame {
     }//GEN-LAST:event_Tpseudo2ActionPerformed
 
     private void RB1joueurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB1joueurActionPerformed
-        Panel1.setVisible(false);
+        Tpseudo2.setEnabled(false);
+        Tpseudo2.setText("Ordinateur");
     }//GEN-LAST:event_RB1joueurActionPerformed
 
     private void BcommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BcommencerActionPerformed
@@ -182,7 +155,8 @@ public class Faccueil extends javax.swing.JFrame {
     }//GEN-LAST:event_BcommencerActionPerformed
 
     private void RB2joueursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB2joueursActionPerformed
-        // TODO add your handling code here:
+        Tpseudo2.setEnabled(true);
+        Tpseudo2.setText("");
     }//GEN-LAST:event_RB2joueursActionPerformed
 
     /**
@@ -225,7 +199,6 @@ public class Faccueil extends javax.swing.JFrame {
     private javax.swing.JButton Bcommencer;
     private javax.swing.JLabel Lpseudo1;
     private javax.swing.JLabel Lpseudo2;
-    private javax.swing.JPanel Panel1;
     private javax.swing.JRadioButton RB1joueur;
     private javax.swing.JRadioButton RB2joueurs;
     private javax.swing.JTextField Tpseudo1;
