@@ -16,7 +16,6 @@ import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import ptraitement.Joueur;
 
 /**
@@ -64,6 +63,8 @@ public class Fjeu extends javax.swing.JDialog {
                 tab[i][j] = bouton;
             }
         }
+        CouleurPlateau();
+        desactiverCoins();
         this.pack();
     }
 
@@ -72,7 +73,7 @@ public class Fjeu extends javax.swing.JDialog {
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab[i].length; j++) {
                 // Remplir les boutons avec des images
-                if (plateau[i][j] instanceof Case_Vide){
+                if (plateau[i][j] instanceof Case_Vide) {
                     tab[i][j].setIcon(null);
                 }
                 if (plateau[i][j] instanceof Pion) {
@@ -95,6 +96,47 @@ public class Fjeu extends javax.swing.JDialog {
         }
     }
 
+    public void CouleurPlateau() {
+        Color Blanc = new Color(245, 245, 220);
+        Color Noir = new Color(180, 102, 67);
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = 0; j < tab[i].length; j++) {
+                if ((j + i) % 2 == 0) {
+                    tab[i][j].setBackground(Blanc);
+                } else {
+                    tab[i][j].setBackground(Noir);
+                }
+            }
+        }
+    }
+
+    public void desactiverCoins() {
+        tab[0][0].setEnabled(false);
+        tab[1][0].setEnabled(false);
+        tab[2][0].setEnabled(false);
+        tab[10][0].setEnabled(false);
+        tab[11][0].setEnabled(false);
+        tab[12][0].setEnabled(false);
+        tab[0][1].setEnabled(false);
+        tab[1][1].setEnabled(false);
+        tab[11][1].setEnabled(false);
+        tab[12][1].setEnabled(false);
+        tab[0][2].setEnabled(false);
+        tab[12][2].setEnabled(false);
+        tab[0][6].setEnabled(false);
+        tab[1][6].setEnabled(false);
+        tab[2][6].setEnabled(false);
+        tab[10][6].setEnabled(false);
+        tab[11][6].setEnabled(false);
+        tab[12][6].setEnabled(false);
+        tab[0][5].setEnabled(false);
+        tab[1][5].setEnabled(false);
+        tab[11][5].setEnabled(false);
+        tab[12][5].setEnabled(false);
+        tab[0][4].setEnabled(false);
+        tab[12][4].setEnabled(false);
+    }
+
     private ImageIcon redimensionnerImage(String chemin, int largeur, int hauteur) {
         ImageIcon icon = new ImageIcon(chemin);
         Image img = icon.getImage().getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
@@ -105,11 +147,15 @@ public class Fjeu extends javax.swing.JDialog {
         String[] coords = e.getActionCommand().split(",");
         int x = Integer.parseInt(coords[0]);
         int y = Integer.parseInt(coords[1]);
+        boolean CapturePossible = false;
+        Piece[][] plateau = monJeu.getPlateau();
 
-        if (selectedPiece == null) {
+        if (selectedPiece == null || plateau[selectedPiece[0]][selectedPiece[1]].getCouleur()== plateau[x][y].getCouleur()){
             // Première sélection : vérifier qu'une pièce du joueur actif est sélectionnée
-            if (monJeu.getPlateau()[x][y] != null
-                    && monJeu.getPlateau()[x][y].getCouleur() == monJeu.getJoueurActif().getCouleur()) {
+            if (plateau[x][y] != null && plateau[x][y].getCouleur() == monJeu.getJoueurActif().getCouleur()) {
+                if(selectedPiece != null){
+                tab[selectedPiece[0]][selectedPiece[1]].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+                }
                 selectedPiece = new int[]{x, y};  // Définir les coordonnées de la pièce sélectionnée
                 tab[x][y].setBorder(BorderFactory.createLineBorder(Color.RED, 2)); // Marquer la pièce sélectionnée
             }
@@ -117,18 +163,29 @@ public class Fjeu extends javax.swing.JDialog {
             // Deuxième clic : tenter de déplacer la pièce sélectionnée
             Piece selected = monJeu.getPlateau()[selectedPiece[0]][selectedPiece[1]];
             boolean moved = selected.deplacerPiece(monJeu.getPlateau(), x, y); // Effectuer le déplacement
-
-            if (moved) {
+            if (!moved) {
+                moved = selected.capture(monJeu.getPlateau(), x, y);
+                CapturePossible = selected.verifCapture(monJeu.getPlateau());
+                if (CapturePossible == true){
+                    tab[selectedPiece[0]][selectedPiece[1]].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    selectedPiece = new int[]{x,y};
+                    tab[x][y].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                    afficherPlateau();
+                }
+            }
+            if (moved && CapturePossible == false) {
                 monJeu.changerTour(); // Passer au joueur suivant
                 afficherPlateau(); // Mettre à jour l'affichage du plateau
             }
 
             // Réinitialiser la sélection
-            tab[selectedPiece[0]][selectedPiece[1]].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            selectedPiece = null; // Réinitialiser à null après l'action
+            if (CapturePossible == false) {
+                tab[selectedPiece[0]][selectedPiece[1]].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                selectedPiece = null; // Réinitialiser à null après l'action
+            }
         }
     }
-
+//Méthode générée par ChatGPT, quelques modification effectuées (capture & chaine de capture implémentées manuellement)
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

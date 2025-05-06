@@ -12,16 +12,13 @@ public abstract class Piece {
     private char couleur;
     protected int coordx, coordy;
     public static final String DOSS_IMAGES = "src/pimages/";
-            
+
     public Piece(char couleur, int coordx, int coordy) {
         this.couleur = couleur;
         this.coordx = coordx;
         this.coordy = coordy;
     }
 
-    
-    
-            
     public char getCouleur() { //méthode pour savoir de quelle couleur est une pièce (Noir ou Blanc)
         return this.couleur;
     }
@@ -65,12 +62,43 @@ public abstract class Piece {
                 coordy = y2;
             }
         }
-    return true;
+        return true;
     }
 
-    
+    public boolean verifCapture(Piece[][] Plateau) {
+        // Vérifie qu'il existe au moins UNE capture possible à effectuer
+        boolean capturePossible = false;
 
-    
+        // Directions possibles pour les mouvements (haut, bas, gauche, droite, et diagonales)
+        int[][] directions = {
+            {-1, -1},{-1, 0},{-1, 1},{0, -1},{0, 1},{1, -1},{1, 0},{1, 1}
+        };
+
+        for (int[] direction : directions) {
+            int x1 = coordx + direction[0]; // Coordonnées de la pièce adverse
+            int y1 = coordy + direction[1];
+            int x2 = coordx + 2 * direction[0]; // Coordonnées de la case derrière
+            int y2 = coordy + 2 * direction[1];
+
+            // Vérifier si les coordonnées sont dans les limites du tableau
+            if (x1 >= 0 && x1 < Plateau.length && y1 >= 0 && y1 < Plateau[0].length
+                    && x2 >= 0 && x2 < Plateau.length && y2 >= 0 && y2 < Plateau[0].length) {
+
+                // Vérifier la présence d'une pièce ennemie à proximité
+                if ((Plateau[x1][y1] instanceof Pion || Plateau[x1][y1] instanceof Cavalier)
+                        && Plateau[x1][y1].getCouleur() != couleur) {
+
+                    // Vérifier que la case derrière l'ennemi est vide
+                    if (Plateau[x2][y2] instanceof Case_Vide) {
+                        capturePossible = true;
+                        break; // Une capture possible suffit
+                    }
+                }
+            }
+        }
+
+        return capturePossible;
+    }
 
     public boolean capture(Piece[][] Plateau, int x2, int y2) {
         int dx = Math.abs(x2 - coordx);
