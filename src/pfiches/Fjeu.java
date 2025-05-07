@@ -80,10 +80,12 @@ public class Fjeu extends javax.swing.JDialog {
 
     public void afficherPlateau() {
         Piece[][] plateau = monJeu.getPlateau(); // Récupère l'état actuel du plateau
+        tab[0][3].setIcon(redimensionnerImage("src/pimages/ChateauN.png", 45, 45));
+        tab[12][3].setIcon(redimensionnerImage("src/pimages/ChateauB.png", 45, 45));
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab[i].length; j++) {
                 // Remplir les boutons avec des images
-                if (plateau[i][j] instanceof Case_Vide) {
+                if (plateau[i][j] instanceof Case_Vide && tab[i][j].getIcon()==null) {
                     tab[i][j].setIcon(null);
                 }
                 if (plateau[i][j] instanceof Pion) {
