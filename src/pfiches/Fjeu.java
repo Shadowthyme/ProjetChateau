@@ -16,6 +16,7 @@ import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import ptraitement.Joueur;
 
 /**
@@ -27,22 +28,31 @@ public class Fjeu extends javax.swing.JDialog {
     private JButton[][] tab = new JButton[13][7];
     private Jeu monJeu;
     private int[] selectedPiece = null; // Initialisé à null au départ
+    protected String pseudo1;
+    protected String pseudo2;
+    protected boolean chargement;
 
     public Fjeu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        chargement = ((Faccueil) this.getParent()).getCBchargement();
+        pseudo1 = ((Faccueil) this.getParent()).getPseudo1();
+        pseudo2 = ((Faccueil) this.getParent()).getPseudo2();
+        System.out.println(pseudo1 + " "+ pseudo2);
         initComponents();
-        initialiser("Joueur1", "Joueur2");
-        monJeu.Generer_plateau();
+        initialiser(pseudo1, pseudo2, chargement);
         afficherPlateau();
     }
 
-    public void initialiser(String pseudo1, String pseudo2) {
+    public void initialiser(String pseudo1, String pseudo2, boolean chargement) {
         char couleur1 = new Random().nextBoolean() ? 'N' : 'B';
         char couleur2 = couleur1 == 'N' ? 'B' : 'N';
-
         Joueur joueur1 = new Joueur(pseudo1, 7, couleur1);
         Joueur joueur2 = new Joueur(pseudo2, 7, couleur2);
         monJeu = new Jeu(joueur1, joueur2);
+        monJeu.Generer_plateau();
+        if (chargement == true) {
+            monJeu.chargerPartie();
+        }
 
         GridLayout layout = new GridLayout(13, 7);
         pPlateau.setLayout(layout);
@@ -150,11 +160,11 @@ public class Fjeu extends javax.swing.JDialog {
         boolean CapturePossible = false;
         Piece[][] plateau = monJeu.getPlateau();
 
-        if (selectedPiece == null || plateau[selectedPiece[0]][selectedPiece[1]].getCouleur()== plateau[x][y].getCouleur()){
+        if (selectedPiece == null || plateau[selectedPiece[0]][selectedPiece[1]].getCouleur() == plateau[x][y].getCouleur()) {
             // Première sélection : vérifier qu'une pièce du joueur actif est sélectionnée
             if (plateau[x][y] != null && plateau[x][y].getCouleur() == monJeu.getJoueurActif().getCouleur()) {
-                if(selectedPiece != null){
-                tab[selectedPiece[0]][selectedPiece[1]].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+                if (selectedPiece != null) {
+                    tab[selectedPiece[0]][selectedPiece[1]].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
                 }
                 selectedPiece = new int[]{x, y};  // Définir les coordonnées de la pièce sélectionnée
                 tab[x][y].setBorder(BorderFactory.createLineBorder(Color.RED, 2)); // Marquer la pièce sélectionnée
@@ -166,9 +176,9 @@ public class Fjeu extends javax.swing.JDialog {
             if (!moved) {
                 moved = selected.capture(monJeu.getPlateau(), x, y);
                 CapturePossible = selected.verifCapture(monJeu.getPlateau());
-                if (CapturePossible == true){
+                if (CapturePossible == true) {
                     tab[selectedPiece[0]][selectedPiece[1]].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    selectedPiece = new int[]{x,y};
+                    selectedPiece = new int[]{x, y};
                     tab[x][y].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                     afficherPlateau();
                 }
@@ -176,6 +186,10 @@ public class Fjeu extends javax.swing.JDialog {
             if (moved && CapturePossible == false) {
                 monJeu.changerTour(); // Passer au joueur suivant
                 afficherPlateau(); // Mettre à jour l'affichage du plateau
+                Joueur Gagnant = monJeu.Victoire();
+                if (Gagnant != null) {
+                    JOptionPane.showMessageDialog(null, "Le joueur " + Gagnant.getPseudo() + " a Gagné!");
+                }
             }
 
             // Réinitialiser la sélection
@@ -192,7 +206,6 @@ public class Fjeu extends javax.swing.JDialog {
     private void initComponents() {
 
         pPlateau = new javax.swing.JPanel();
-        bCase = new javax.swing.JButton();
         bRetour2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -210,8 +223,6 @@ public class Fjeu extends javax.swing.JDialog {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        bCase.setText("jButton1");
-
         bRetour2.setText("Retour");
         bRetour2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,10 +238,8 @@ public class Fjeu extends javax.swing.JDialog {
                 .addGap(93, 93, 93)
                 .addComponent(pPlateau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bCase)
-                    .addComponent(bRetour2))
-                .addGap(64, 64, 64))
+                .addComponent(bRetour2)
+                .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,9 +249,7 @@ public class Fjeu extends javax.swing.JDialog {
                         .addGap(57, 57, 57)
                         .addComponent(pPlateau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(bCase)
-                        .addGap(18, 18, 18)
+                        .addGap(112, 112, 112)
                         .addComponent(bRetour2)))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
@@ -251,6 +258,7 @@ public class Fjeu extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bRetour2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRetour2ActionPerformed
+        monJeu.sauvegarderPartie();
         this.setVisible(false);
         this.getParent().setVisible(true);
     }//GEN-LAST:event_bRetour2ActionPerformed
@@ -298,7 +306,6 @@ public class Fjeu extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bCase;
     private javax.swing.JButton bRetour2;
     private javax.swing.JPanel pPlateau;
     // End of variables declaration//GEN-END:variables

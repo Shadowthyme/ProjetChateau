@@ -1,6 +1,11 @@
 package ptraitement;
 
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import static ptraitement.Piece.DOSS_IMAGES;
 
@@ -13,15 +18,18 @@ public class Jeu {
     private Piece[][] Plateau;
     private Joueur Joueur1, Joueur2;
     private Joueur J_actif;
-    private String nomFichier;
+    private final String nomFichier;
 
     public Jeu(Joueur Joueur1, Joueur Joueur2) {
-        //, Joueur Joueur_actif             this.J_actif = Joueur_actif;
         this.Plateau = new Piece[13][7];
         this.Joueur1 = Joueur1;
         this.Joueur2 = Joueur2;
         this.nomFichier = "partie.txt";
-        J_actif = this.Joueur1;
+        if (Joueur1.getCouleur() == 'B') {
+            J_actif = Joueur1;
+        } else {
+            J_actif = Joueur2;
+        }
     }
 
     public void Generer_plateau() {
@@ -64,7 +72,8 @@ public class Jeu {
             }
         }
     }
-/*public void afficher(){
+
+    /*public void afficher(){
         Toolkit t = Toolkit.getDefaultToolkit();
         String cavaB="CavalierB.jpg";
         String cavaN="CavalierN.png";
@@ -88,7 +97,7 @@ if(pion.getCouleur()=='B'){
                 }
             }
         }
-*/
+     */
     public void afficherPlateau() {
         System.out.println("   A  B  C  D  E  F  G"); // En-tête des colonnes
         for (int i = 0; i < Plateau.length; i++) {
@@ -150,6 +159,28 @@ if(pion.getCouleur()=='B'){
             victoire = J_actif.getCouleur();
         }
         return victoire;
+    }
+
+    public Joueur Victoire() {
+        //Teste les différentes conditions de victoire
+        Joueur res = null;
+        char V = Victoire_Chateau();
+        if (V != ' ') {
+            if (Joueur1.getCouleur() == V) {
+                res = Joueur1;
+            } else {
+                res = Joueur2;
+            }
+        }
+        V = Victoire_platVide();
+        if (V != ' ') {
+            if (Joueur1.getCouleur() == V) {
+                res = Joueur1;
+            } else {
+                res = Joueur2;
+            }
+        }
+        return res;
     }
 
     public Joueur getJoueurActif() {
@@ -221,6 +252,88 @@ if(pion.getCouleur()=='B'){
                 // Changer de tour après chaque action
                 changerTour();
             }
+        }
+    }
+
+public void sauvegarderPartie() {
+    if (nomFichier == null || nomFichier.isEmpty()) {
+        System.out.println("Erreur : Aucun fichier de sauvegarde spécifié.");
+        return;
+    }
+
+    System.out.println("Sauvegarde en cours dans le fichier : " + nomFichier);
+
+    try (FileWriter writer = new FileWriter(nomFichier)) {
+        // Sauvegarde du plateau
+        for (int i = 0; i < 13; i++) {
+            for (int j = 0; j < 7; j++) {
+                Piece piece = Plateau[i][j];
+                if (piece instanceof Case_Vide) {
+                    writer.write(((Case_Vide) piece).estInterdite() ? "X " : ". ");
+                } else {
+                    writer.write(piece.getSymbole() + " ");
+                }
+            }
+            writer.write("\n");
+        }
+
+        // Sauvegarde des informations des joueurs
+        writer.write(Joueur1.getPseudo() + " " + Joueur1.getCouleur() + "\n");
+        writer.write(Joueur2.getPseudo() + " " + Joueur2.getCouleur() + "\n");
+
+        // Sauvegarde du joueur actif
+        writer.write(J_actif.getPseudo() + "\n");
+
+        System.out.println("Sauvegarde réussie !");
+    } catch (IOException e) {
+        System.out.println("Erreur lors de la sauvegarde : " + e.getMessage());
+    }
+
+    // Vérification de l'existence du fichier
+    File fichier = new File(nomFichier);
+    if (fichier.exists()) {
+        System.out.println("Fichier sauvegardé avec succès : " + fichier.getAbsolutePath());
+    } else {
+        System.out.println("Erreur : Le fichier n'a pas été créé.");
+    }
+}
+
+    public void chargerPartie() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/" + nomFichier))) {
+            // Lecture du plateau
+            for (int i = 0; i < 13; i++) {
+                String[] ligne = reader.readLine().split(" ");
+                for (int j = 0; j < 7; j++) {
+                    char symbole = ligne[j].charAt(0);
+                    if (symbole == 'X') {
+                        Plateau[i][j] = new Case_Vide(i, j, true);
+                    } else if (symbole == '.') {
+                        Plateau[i][j] = new Case_Vide(i, j, false);
+                    } else if (symbole == 'P' || symbole == 'C') {
+                        char couleur = (i < 6) ? 'N' : 'B'; // Supposition (à affiner)
+                        if (symbole == 'P') {
+                            Plateau[i][j] = new Pion(couleur, i, j);
+                        } else {
+                            Plateau[i][j] = new Cavalier(couleur, i, j);
+                        }
+                    }
+                }
+            }
+
+            // Lecture des joueurs
+            String[] joueur1Data = reader.readLine().split(" ");
+            Joueur1 = new Joueur(joueur1Data[0], 0, joueur1Data[1].charAt(0));
+
+            String[] joueur2Data = reader.readLine().split(" ");
+            Joueur2 = new Joueur(joueur2Data[0], 7, joueur2Data[1].charAt(0));
+
+            // Lecture du joueur actif
+            String pseudoActif = reader.readLine();
+            J_actif = pseudoActif.equals(Joueur1.getPseudo()) ? Joueur1 : Joueur2;
+
+            System.out.println("Partie chargee !");
+        } catch (IOException e) {
+            System.out.println("Erreur lors du chargement de la partie.");
         }
     }
 }

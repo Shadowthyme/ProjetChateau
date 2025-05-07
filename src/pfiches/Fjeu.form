@@ -27,11 +27,8 @@
               <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
               <Component id="pPlateau" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="68" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="bCase" min="-2" max="-2" attributes="0"/>
-                  <Component id="bRetour2" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+              <Component id="bRetour2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -44,9 +41,7 @@
                       <Component id="pPlateau" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                      <Component id="bCase" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                       <Component id="bRetour2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -76,11 +71,6 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JButton" name="bCase">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jButton1"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="bRetour2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Retour"/>

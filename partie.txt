@@ -1,0 +1,16 @@
+X X X . X X X 
+X X . . . X X 
+X . . . . . X 
+. . CN . CN . . 
+. PN PN . PN . . 
+. . . PN . . . 
+. . . . . . . 
+. . . PB . . . 
+. . . . . . . 
+. . . . . . . 
+X . . . . . X 
+X X . . . X X 
+X X X . X X X 
+H N
+E B
+E

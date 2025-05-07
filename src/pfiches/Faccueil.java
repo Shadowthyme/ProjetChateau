@@ -13,13 +13,12 @@ import ptraitement.Joueur;
 public class Faccueil extends javax.swing.JFrame {
     private Fjeu fichJeu;
     private Jeu monJeu;
-    private String pseudo1;
-    private String pseudo2;
+    protected String pseudo1;
+    protected String pseudo2;
 
     
     public Faccueil() {
         initComponents();
-        fichJeu=new Fjeu(this,false);
         
     }
     public Fjeu getFichJeu(){return fichJeu;}
@@ -164,9 +163,10 @@ public class Faccueil extends javax.swing.JFrame {
     private void BcommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BcommencerActionPerformed
         pseudo1 = Tpseudo1.getText();
         pseudo2 = Tpseudo2.getText();
+        fichJeu = new Fjeu(this,false);
+        System.out.println(pseudo1 + " " +  pseudo2);
         this.setVisible(false);
         fichJeu.setVisible(true);
-        
     }//GEN-LAST:event_BcommencerActionPerformed
 
     private void RB2joueursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB2joueursActionPerformed
