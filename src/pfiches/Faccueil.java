@@ -19,6 +19,7 @@ public class Faccueil extends javax.swing.JFrame {
     
     public Faccueil() {
         initComponents();
+        this.setLocation(560,220);
         
     }
     public Fjeu getFichJeu(){return fichJeu;}
@@ -164,6 +165,7 @@ public class Faccueil extends javax.swing.JFrame {
         pseudo1 = Tpseudo1.getText();
         pseudo2 = Tpseudo2.getText();
         fichJeu = new Fjeu(this,false);
+        fichJeu.setLocationRelativeTo(null);
         System.out.println(pseudo1 + " " +  pseudo2);
         this.setVisible(false);
         fichJeu.setVisible(true);
